@@ -23,6 +23,18 @@ public class Facultad {
         return decano;
     }
 
+    public void setId(Double id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDecano(Persona decano) {
+        this.decano = decano;
+    }
+
     @Override
     public String toString() {
         return "Facultad{" +
