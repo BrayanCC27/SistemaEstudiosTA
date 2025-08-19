@@ -13,10 +13,6 @@ public class Persona {
         this.email = email;
     }
 
-    public String toString() {
-        return nombres + " " + apellidos;
-    }
-
     public Double getId() {
         return Id;
     }
@@ -47,5 +43,13 @@ public class Persona {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Id=" + Id +
+                ", nombres='" + nombres +
+                ", apellidos='" + apellidos +
+                ", email='" + email;
     }
 }
