@@ -36,4 +36,35 @@ public class Programa {
     public Facultad getFacultad() {
         return facultad;
     }
+
+    public void setId(Double id) {
+        Id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDuracion(Double duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setRegistro(Date registro) {
+        this.registro = registro;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
+    }
+
+    @Override
+    public String toString() {
+        return "Programa{" +
+                "Id=" + Id +
+                ", nombre='" + nombre + '\'' +
+                ", duracion=" + duracion +
+                ", registro=" + registro +
+                ", facultad=" + facultad +
+                '}';
+    }
 }
