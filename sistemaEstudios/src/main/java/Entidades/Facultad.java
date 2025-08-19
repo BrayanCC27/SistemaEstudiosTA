@@ -10,4 +10,16 @@ public class Facultad {
         this.nombre = nombre;
         this.decano = decano;
     }
+
+    public Double getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Persona getDecano() {
+        return decano;
+    }
 }
