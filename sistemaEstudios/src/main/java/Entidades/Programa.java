@@ -36,4 +36,15 @@ public class Programa {
     public Facultad getFacultad() {
         return facultad;
     }
+
+    @Override
+    public String toString() {
+        return "Programa{" +
+                "Id=" + Id +
+                ", nombre='" + nombre + '\'' +
+                ", duracion=" + duracion +
+                ", registro=" + registro +
+                ", facultad=" + facultad +
+                '}';
+    }
 }

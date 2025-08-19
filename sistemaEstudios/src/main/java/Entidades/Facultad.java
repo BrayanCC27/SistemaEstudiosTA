@@ -22,4 +22,13 @@ public class Facultad {
     public Persona getDecano() {
         return decano;
     }
+
+    @Override
+    public String toString() {
+        return "Facultad{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", decano=" + decano +
+                '}';
+    }
 }
