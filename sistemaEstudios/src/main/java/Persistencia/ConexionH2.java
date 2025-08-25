@@ -13,7 +13,7 @@ public class ConexionH2 {
     private static ConexionH2 instancia;
     private Connection conexion;
 
-    private ConexionH2() {
+    public ConexionH2() {
         this.URL = "jdbc:h2:./appDB";
         this.USER = "sa";
         this.PASSWORD = "";
