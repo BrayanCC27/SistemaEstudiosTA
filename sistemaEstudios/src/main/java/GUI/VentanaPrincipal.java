@@ -120,7 +120,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         IncripcionPersonasLayout.setHorizontalGroup(
             IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IncripcionPersonasLayout.createSequentialGroup()
-                .addGap(146, 146, 146)
+                .addGap(135, 135, 135)
                 .addGroup(IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(IncripcionPersonasLayout.createSequentialGroup()
                         .addGroup(IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -137,12 +137,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(IncripcionPersonasLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(BTNIncribirPersona)))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         IncripcionPersonasLayout.setVerticalGroup(
             IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IncripcionPersonasLayout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
+            .addGroup(IncripcionPersonasLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(IDPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,7 +160,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(EmailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BTNIncribirPersona)
-                .addGap(122, 122, 122))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
 
         TPPersonas.addTab("Inscribir", IncripcionPersonas);
