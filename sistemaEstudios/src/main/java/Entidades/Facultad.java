@@ -1,6 +1,6 @@
 package Entidades;
 
-public class Facultad {
+public class  Facultad {
     private Double id;
     private String nombre;
     private Persona decano;
