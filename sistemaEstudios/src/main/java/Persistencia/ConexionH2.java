@@ -36,7 +36,6 @@ public class ConexionH2 {
             try {
                 Class.forName("org.h2.Driver");
                 conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("Conexión a H2 establecida.");
             } catch (ClassNotFoundException e) {
                 throw new SQLException("Driver no encontrado.", e);
             }

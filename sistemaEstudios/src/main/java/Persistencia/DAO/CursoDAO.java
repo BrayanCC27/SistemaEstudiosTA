@@ -6,9 +6,19 @@ import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CursoDAO {
-    private ProgramaDAO programaDAO = new ProgramaDAO();
+    private ProgramaDAO programaDAO;
+
+    public CursoDAO() {
+        try {
+            this.programaDAO = new ProgramaDAO();
+        } catch (SQLException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // CREATE
     public void crear(Curso curso) {

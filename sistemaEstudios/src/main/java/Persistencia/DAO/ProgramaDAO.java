@@ -8,14 +8,21 @@ import java.sql.*;
 import java.util.*;
 
 public class ProgramaDAO {
-    private FacultadDAO facultadDAO = new FacultadDAO();
+    private FacultadDAO facultadDAO;
+    private Connection conection;
+
+    public ProgramaDAO() throws SQLException {
+        this.conection = ConexionH2.getInstancia().conectar();
+        this.facultadDAO = new FacultadDAO();
+    }
+    
+    
 
     // CREATE
     public void crear(Programa programa) {
         String sql = "INSERT INTO programa (id, nombre, duracion, fecha_registro, facultad_id) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conection.prepareStatement(sql)) {
 
             stmt.setDouble(1, programa.getId());
             stmt.setString(2, programa.getNombre());
@@ -34,8 +41,7 @@ public class ProgramaDAO {
     public Programa obtenerPorId(Double id) {
         String sql = "SELECT * FROM programa WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conection.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);
 
@@ -65,8 +71,7 @@ public class ProgramaDAO {
         List<Programa> programas = new ArrayList<>();
         String sql = "SELECT * FROM programa";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             Statement stmt = conn.createStatement();
+        try (Statement stmt = conection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
@@ -92,8 +97,7 @@ public class ProgramaDAO {
     public void actualizar(Programa programa) {
         String sql = "UPDATE programa SET nombre = ?, duracion = ?, fecha_registro = ?, facultad_id = ? WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conection.prepareStatement(sql)) {
 
             stmt.setString(1, programa.getNombre());
             stmt.setDouble(2, programa.getDuracion());
@@ -112,8 +116,7 @@ public class ProgramaDAO {
     public void eliminar(Double id) {
         String sql = "DELETE FROM programa WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conection.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);
             stmt.executeUpdate();

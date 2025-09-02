@@ -4,10 +4,13 @@
  */
 package GUI;
 
-import Entidades.Persona;
-import Persistencia.DAO.PersonaDAO;
+import Entidades.*;
+import Persistencia.DAO.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +22,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
+        try {
+            this.programaDao = new ProgramaDAO();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
     }
 
@@ -54,6 +62,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         IDEliminar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
         ContenedorEstudiantes = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         IDEstudiante = new javax.swing.JTextField();
@@ -61,18 +70,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         NombresEstudiante = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        Apellidos1 = new javax.swing.JTextField();
+        ApellidosEstudiante = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        Email1 = new javax.swing.JTextField();
+        EmailEstudiante = new javax.swing.JTextField();
         BTNIncribirEstudiante = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        CodigoEstudiante = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        CBProgramas = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         CBActivo = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         Promedio = new javax.swing.JTextField();
+        IDPrograma = new javax.swing.JTextField();
+        Codigo = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
         ContenedorProfesores = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -94,6 +103,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         TPInscripciones = new javax.swing.JTabbedPane();
         IncribirIncripcion = new javax.swing.JPanel();
         EliminarIncripcion = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListaProgramas = new javax.swing.JTextArea();
 
         jLabel4.setText("jLabel4");
 
@@ -104,6 +118,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ContenedorPrincipal.setBackground(new java.awt.Color(249, 248, 250));
 
         TPPrincipal.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        TPPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TPPrincipalMouseClicked(evt);
+            }
+        });
 
         TPPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -172,7 +191,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(IncripcionPersonasLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(BTNIncribirPersona)))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         IncripcionPersonasLayout.setVerticalGroup(
             IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +214,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(EmailPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BTNIncribirPersona)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TPPersonas.addTab("Inscribir", IncripcionPersonas);
@@ -216,14 +235,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel24.setText("ID -- NOMBRES APELLIDOS");
+
         javax.swing.GroupLayout EliminarPersonasLayout = new javax.swing.GroupLayout(EliminarPersonas);
         EliminarPersonas.setLayout(EliminarPersonasLayout);
         EliminarPersonasLayout.setHorizontalGroup(
             EliminarPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EliminarPersonasLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(EliminarPersonasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,6 +254,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jButton1)))
                 .addGap(62, 62, 62))
+            .addGroup(EliminarPersonasLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(EliminarPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         EliminarPersonasLayout.setVerticalGroup(
             EliminarPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,16 +267,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24)
+                .addGap(2, 2, 2)
                 .addGroup(EliminarPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addGroup(EliminarPersonasLayout.createSequentialGroup()
                         .addGroup(EliminarPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(IDEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TPPersonas.addTab("Eliminar", EliminarPersonas);
@@ -294,15 +318,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("Codigo");
-
         jLabel16.setText("Programa");
-
-        CBProgramas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel17.setText("Activo");
 
+        CBActivo.setSelected(true);
+
         jLabel18.setText("Promedio");
+
+        jLabel27.setText("Codigo");
 
         javax.swing.GroupLayout ContenedorEstudiantesLayout = new javax.swing.GroupLayout(ContenedorEstudiantes);
         ContenedorEstudiantes.setLayout(ContenedorEstudiantesLayout);
@@ -314,37 +338,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(204, 204, 204)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ContenedorEstudiantesLayout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(BTNIncribirEstudiante))
-                    .addGroup(ContenedorEstudiantesLayout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel27))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(ContenedorEstudiantesLayout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CodigoEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ContenedorEstudiantesLayout.createSequentialGroup()
-                                .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel18))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(ContenedorEstudiantesLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(CBActivo))
-                                    .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(IDEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                        .addComponent(NombresEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                        .addComponent(Apellidos1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                        .addComponent(Email1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                        .addComponent(CBProgramas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Promedio, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))))))
-                .addGap(49, 262, Short.MAX_VALUE))
+                                .addGap(6, 6, 6)
+                                .addComponent(CBActivo))
+                            .addComponent(IDEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(NombresEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(ApellidosEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(EmailEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(Promedio, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(IDPrograma)
+                            .addComponent(Codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
+                    .addGroup(ContenedorEstudiantesLayout.createSequentialGroup()
+                        .addGap(247, 247, 247)
+                        .addComponent(BTNIncribirEstudiante)))
+                .addGap(49, 227, Short.MAX_VALUE))
         );
         ContenedorEstudiantesLayout.setVerticalGroup(
             ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,10 +374,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(IDEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(CodigoEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -366,16 +381,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(Apellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ApellidosEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(Email1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmailEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(CBProgramas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(IDPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(CBActivo))
@@ -383,9 +402,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(Promedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(BTNIncribirEstudiante)
-                .addGap(118, 118, 118))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         TPPrincipal.addTab("Estudiantes", ContenedorEstudiantes);
@@ -470,7 +489,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BTNIncribirProfesor)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         TPPrincipal.addTab("Profesores", ContenedorProfesores);
@@ -483,7 +502,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         InscribirCursoProfesorLayout.setVerticalGroup(
             InscribirCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
 
         TPCursoProfesor.addTab("Inscribir", InscribirCursoProfesor);
@@ -496,7 +515,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         EliminarCursoProfesorLayout.setVerticalGroup(
             EliminarCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
 
         TPCursoProfesor.addTab("Eliminar", EliminarCursoProfesor);
@@ -528,7 +547,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         IncribirIncripcionLayout.setVerticalGroup(
             IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
 
         TPInscripciones.addTab("Inscribir", IncribirIncripcion);
@@ -541,7 +560,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         EliminarIncripcionLayout.setVerticalGroup(
             EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
 
         TPInscripciones.addTab("Eliminar", EliminarIncripcion);
@@ -565,6 +584,45 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         TPPrincipal.addTab("Inscripciones", ContenedorInscripciones);
 
+        jLabel25.setText("Lista de Programas");
+
+        jLabel26.setText("ID - NOMBRE");
+
+        ListaProgramas.setColumns(20);
+        ListaProgramas.setRows(5);
+        jScrollPane2.setViewportView(ListaProgramas);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(274, 274, 274)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(14, 14, 14)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(210, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        TPPrincipal.addTab("Programas", jPanel1);
+
         javax.swing.GroupLayout ContenedorPrincipalLayout = new javax.swing.GroupLayout(ContenedorPrincipal);
         ContenedorPrincipal.setLayout(ContenedorPrincipalLayout);
         ContenedorPrincipalLayout.setHorizontalGroup(
@@ -579,7 +637,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(ContenedorPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(TPPrincipal)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -613,7 +671,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNIncribirPersonaActionPerformed
 
     private void BTNIncribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIncribirEstudianteActionPerformed
-        // TODO add your handling code here:
+        Double id = Double.valueOf(IDEstudiante.getText());
+        String nombres = NombresEstudiante.getText();
+        String apellidos = ApellidosEstudiante.getText();
+        String email = EmailEstudiante.getText();
+        Double codigo = Double.valueOf(Codigo.getText());
+        programa = programaDao.obtenerPorId(Double.valueOf(IDPrograma.getText()));
+        boolean activo = CBActivo.isSelected();
+        Double promedio = Double.valueOf(Promedio.getText());
+        
+        estudiante = new Estudiante(id, nombres, apellidos, email, codigo, programa, activo, promedio);
+        estudianteDao.crear(estudiante);
+        
     }//GEN-LAST:event_BTNIncribirEstudianteActionPerformed
 
     private void BTNIncribirProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIncribirProfesorActionPerformed
@@ -645,16 +714,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         actualizarListaPersonas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void TPPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPPrincipalMouseClicked
+        actualizarListaProgramas();
+    }//GEN-LAST:event_TPPrincipalMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Apellidos1;
+    private javax.swing.JTextField ApellidosEstudiante;
     private javax.swing.JTextField ApellidosPersona;
     private javax.swing.JTextField ApellidosProfesor;
     private javax.swing.JButton BTNIncribirEstudiante;
     private javax.swing.JButton BTNIncribirPersona;
     private javax.swing.JButton BTNIncribirProfesor;
     private javax.swing.JCheckBox CBActivo;
-    private javax.swing.JComboBox<String> CBProgramas;
-    private javax.swing.JTextField CodigoEstudiante;
+    private javax.swing.JTextField Codigo;
     private javax.swing.JPanel ContenedorCursoProfesor;
     private javax.swing.JPanel ContenedorEstudiantes;
     private javax.swing.JPanel ContenedorInscripciones;
@@ -664,17 +736,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel EliminarCursoProfesor;
     private javax.swing.JPanel EliminarIncripcion;
     private javax.swing.JPanel EliminarPersonas;
-    private javax.swing.JTextField Email1;
+    private javax.swing.JTextField EmailEstudiante;
     private javax.swing.JTextField EmailPersona;
     private javax.swing.JTextField EmailProfesor;
     private javax.swing.JTextField IDEliminar;
     private javax.swing.JTextField IDEstudiante;
     private javax.swing.JTextField IDPersona;
     private javax.swing.JTextField IDProfesor;
+    private javax.swing.JTextField IDPrograma;
     private javax.swing.JPanel IncribirIncripcion;
     private javax.swing.JPanel IncripcionPersonas;
     private javax.swing.JPanel InscribirCursoProfesor;
     private javax.swing.JTextArea ListaPersonas;
+    private javax.swing.JTextArea ListaProgramas;
     private javax.swing.JTextField NombresEstudiante;
     private javax.swing.JTextField NombresPersona;
     private javax.swing.JTextField NombresProfesor;
@@ -691,7 +765,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -701,6 +774,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -708,12 +785,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     
     PersonaDAO personaDao = new PersonaDAO();
     Persona persona;
     List<Persona> arrayPersonas = new ArrayList<>();
+    
+    EstudianteDAO estudianteDao = new EstudianteDAO();
+    Estudiante estudiante;
+    List<Estudiante> arrayEstudiante = new ArrayList<>();
+    
+    ProfesorDAO profesorDao = new ProfesorDAO();
+    Profesor profesor;
+    List<Profesor> arrayProfesor = new ArrayList<>();
+    
+    ProgramaDAO programaDao;
+    Programa programa;
+    List<Programa> arrayPrograma = new ArrayList<>();
     
     private void actualizarListaPersonas(){
     ListaPersonas.setText("");
@@ -721,8 +812,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     for(Persona aux : arrayPersonas){
         ListaPersonas.append(String.valueOf(aux.getId())
                             + " -- " + aux.getNombres() 
-                            + " " + aux.getApellidos());
+                            + " " + aux.getApellidos() + "\n");
 
     }
-}   
+}  
+    private void actualizarListaProgramas(){
+    ListaProgramas.setText("");
+    arrayPrograma = programaDao.obtenerTodos();
+    for(Programa aux : arrayPrograma){
+        ListaPersonas.append(String.valueOf(aux.getId())
+                            + " -- " + aux.getNombre() + "\n");
+
+    }
+} 
 }
