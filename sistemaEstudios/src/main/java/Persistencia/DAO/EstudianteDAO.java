@@ -10,18 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EstudianteDAO {
-    private PersonaDAO personaDAO;
+    private PersonaDAO personaDAO = new PersonaDAO();
     private ProgramaDAO programaDAO;
-
-    public EstudianteDAO() {
-        
-        try {
-            this.programaDAO = new ProgramaDAO();
-        } catch (SQLException ex) {
-            Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.personaDAO = new PersonaDAO();
-    }
 
     // CREATE
     public void crear(Estudiante estudiante) {
