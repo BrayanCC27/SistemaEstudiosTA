@@ -25,7 +25,7 @@ public class ProgramaDAO {
             stmt.setDouble(1, programa.getId());
             stmt.setString(2, programa.getNombre());
             stmt.setDouble(3, programa.getDuracion());
-            stmt.setString(4, String.valueOf(new java.sql.Date(programa.getRegistro().getTime())));
+            stmt.setString(4, String.valueOf(programa.getRegistro()));
             stmt.setDouble(5, programa.getFacultad().getId());
 
             stmt.executeUpdate();
@@ -51,7 +51,7 @@ public class ProgramaDAO {
                             rs.getDouble("id"),
                             rs.getString("nombre"),
                             rs.getDouble("duracion"),
-                            rs.getDate("registro"),
+                            rs.getString("registro"),
                             facultad
                     );
                 }
@@ -79,7 +79,7 @@ public class ProgramaDAO {
                         rs.getDouble("id"),
                         rs.getString("nombre"),
                         rs.getDouble("duracion"),
-                        rs.getDate("registro"),
+                        rs.getString("registro"),
                         facultad
                 ));
             }
@@ -99,7 +99,7 @@ public class ProgramaDAO {
 
             stmt.setString(1, programa.getNombre());
             stmt.setDouble(2, programa.getDuracion());
-            stmt.setString(3, String.valueOf(new java.sql.Date(programa.getRegistro().getTime())));
+            stmt.setString(3, String.valueOf(programa.getRegistro()));
             stmt.setDouble(4, programa.getFacultad().getId());
             stmt.setDouble(5, programa.getId());
 

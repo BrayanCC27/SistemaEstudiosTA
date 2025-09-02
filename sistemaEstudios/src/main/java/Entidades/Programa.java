@@ -6,10 +6,10 @@ public class Programa {
     private Double Id;
     private String nombre;
     private Double duracion;
-    private Date registro;
+    private String registro;
     private Facultad facultad;
 
-    public Programa(Double id, String nombre, Double duracion, Date registro, Facultad facultad) {
+    public Programa(Double id, String nombre, Double duracion, String registro, Facultad facultad) {
         this.Id = id;
         this.nombre = nombre;
         this.duracion = duracion;
@@ -29,7 +29,7 @@ public class Programa {
         return duracion;
     }
 
-    public Date getRegistro() {
+    public String getRegistro() {
         return registro;
     }
 
