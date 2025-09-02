@@ -21,7 +21,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
+    public VentanaPrincipal() throws SQLException {
         try {
             this.programaDao = new ProgramaDAO();
         } catch (SQLException ex) {

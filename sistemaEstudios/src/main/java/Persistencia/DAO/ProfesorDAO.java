@@ -7,7 +7,13 @@ import java.sql.*;
 import java.util.*;
 
 public class ProfesorDAO {
-    private PersonaDAO personaDAO = new PersonaDAO();
+    private PersonaDAO personaDAO;
+    private Connection connection;
+
+    public ProfesorDAO() throws SQLException {
+        this.connection = ConexionH2.getInstancia().conectar();
+        this.personaDAO = new PersonaDAO();
+    }
 
     // CREATE
     public void crear(Profesor profesor) {
@@ -17,8 +23,7 @@ public class ProfesorDAO {
         // Then create the professor-specific information
         String sql = "INSERT INTO profesor (id, tipo_contrato) VALUES (?, ?)";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setDouble(1, profesor.getId());
             stmt.setString(2, profesor.getTipoContrato());
