@@ -15,19 +15,17 @@ public class ProgramaDAO {
         this.conection = ConexionH2.getInstancia().conectar();
         this.facultadDAO = new FacultadDAO();
     }
-    
-    
 
     // CREATE
     public void crear(Programa programa) {
-        String sql = "INSERT INTO programa (id, nombre, duracion, fecha_registro, facultad_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO programa (id, nombre, duracion, registro, facultad_id) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conection.prepareStatement(sql)) {
 
             stmt.setDouble(1, programa.getId());
             stmt.setString(2, programa.getNombre());
             stmt.setDouble(3, programa.getDuracion());
-            stmt.setDate(4, new java.sql.Date(programa.getRegistro().getTime()));
+            stmt.setString(4, String.valueOf(new java.sql.Date(programa.getRegistro().getTime())));
             stmt.setDouble(5, programa.getFacultad().getId());
 
             stmt.executeUpdate();
@@ -53,7 +51,7 @@ public class ProgramaDAO {
                             rs.getDouble("id"),
                             rs.getString("nombre"),
                             rs.getDouble("duracion"),
-                            rs.getDate("fecha_registro"),
+                            rs.getDate("registro"),
                             facultad
                     );
                 }
@@ -81,7 +79,7 @@ public class ProgramaDAO {
                         rs.getDouble("id"),
                         rs.getString("nombre"),
                         rs.getDouble("duracion"),
-                        rs.getDate("fecha_registro"),
+                        rs.getDate("registro"),
                         facultad
                 ));
             }
@@ -95,13 +93,13 @@ public class ProgramaDAO {
 
     // UPDATE
     public void actualizar(Programa programa) {
-        String sql = "UPDATE programa SET nombre = ?, duracion = ?, fecha_registro = ?, facultad_id = ? WHERE id = ?";
+        String sql = "UPDATE programa SET nombre = ?, duracion = ?, registro = ?, facultad_id = ? WHERE id = ?";
 
         try (PreparedStatement stmt = conection.prepareStatement(sql)) {
 
             stmt.setString(1, programa.getNombre());
             stmt.setDouble(2, programa.getDuracion());
-            stmt.setDate(3, new java.sql.Date(programa.getRegistro().getTime()));
+            stmt.setString(3, String.valueOf(new java.sql.Date(programa.getRegistro().getTime())));
             stmt.setDouble(4, programa.getFacultad().getId());
             stmt.setDouble(5, programa.getId());
 
