@@ -4,6 +4,11 @@
  */
 package GUI;
 
+import Entidades.Persona;
+import Persistencia.DAO.PersonaDAO;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author USUARIO
@@ -100,6 +105,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         TPPrincipal.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        TPPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TPPersonasMouseClicked(evt);
+            }
+        });
+
         jLabel1.setText("ID");
 
         jLabel2.setText("Nombres");
@@ -112,6 +123,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         BTNIncribirPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNIncribirPersonaActionPerformed(evt);
+            }
+        });
+
+        IDPersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IDPersonaKeyTyped(evt);
+            }
+        });
+
+        NombresPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombresPersonaActionPerformed(evt);
+            }
+        });
+
+        EmailPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailPersonaActionPerformed(evt);
+            }
+        });
+
+        ApellidosPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApellidosPersonaActionPerformed(evt);
             }
         });
 
@@ -137,7 +172,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(IncripcionPersonasLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(BTNIncribirPersona)))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         IncripcionPersonasLayout.setVerticalGroup(
             IncripcionPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,6 +202,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel13.setText("Listado de Personas");
 
+        ListaPersonas.setEditable(false);
         ListaPersonas.setColumns(20);
         ListaPersonas.setRows(5);
         jScrollPane1.setViewportView(ListaPersonas);
@@ -174,6 +210,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel14.setText("ID");
 
         jButton1.setText("Eliminar Persona");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout EliminarPersonasLayout = new javax.swing.GroupLayout(EliminarPersonas);
         EliminarPersonas.setLayout(EliminarPersonasLayout);
@@ -186,7 +227,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(EliminarPersonasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(EliminarPersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EliminarPersonasLayout.createSequentialGroup()
                         .addComponent(jLabel14)
@@ -303,7 +344,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addComponent(Email1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                                         .addComponent(CBProgramas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(Promedio, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))))))
-                .addGap(49, 219, Short.MAX_VALUE))
+                .addGap(49, 262, Short.MAX_VALUE))
         );
         ContenedorEstudiantesLayout.setVerticalGroup(
             ContenedorEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +441,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContenedorProfesoresLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(51, 51, 51)))))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
         ContenedorProfesoresLayout.setVerticalGroup(
             ContenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +479,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         InscribirCursoProfesor.setLayout(InscribirCursoProfesorLayout);
         InscribirCursoProfesorLayout.setHorizontalGroup(
             InscribirCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
         InscribirCursoProfesorLayout.setVerticalGroup(
             InscribirCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +492,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         EliminarCursoProfesor.setLayout(EliminarCursoProfesorLayout);
         EliminarCursoProfesorLayout.setHorizontalGroup(
             EliminarCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
         EliminarCursoProfesorLayout.setVerticalGroup(
             EliminarCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +524,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         IncribirIncripcion.setLayout(IncribirIncripcionLayout);
         IncribirIncripcionLayout.setHorizontalGroup(
             IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
         IncribirIncripcionLayout.setVerticalGroup(
             IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,7 +537,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         EliminarIncripcion.setLayout(EliminarIncripcionLayout);
         EliminarIncripcionLayout.setHorizontalGroup(
             EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
         EliminarIncripcionLayout.setVerticalGroup(
             EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,7 +593,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ContenedorPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -563,7 +604,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNIncribirPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIncribirPersonaActionPerformed
-        // TODO add your handling code here:
+           // TODO add your handling code here:
+           Double id = Double.valueOf(IDPersona.getText());
+           String nombres = NombresPersona.getText();
+           String apellidos = ApellidosPersona.getText();
+           String email = EmailPersona.getText();
+           persona = new Persona(id, nombres, apellidos, email);
     }//GEN-LAST:event_BTNIncribirPersonaActionPerformed
 
     private void BTNIncribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIncribirEstudianteActionPerformed
@@ -574,40 +620,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BTNIncribirProfesorActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void IDPersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDPersonaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDPersonaKeyTyped
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaPrincipal().setVisible(true);
-            }
-        });
-    }
+    private void NombresPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombresPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NombresPersonaActionPerformed
+
+    private void EmailPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailPersonaActionPerformed
+
+    private void ApellidosPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidosPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ApellidosPersonaActionPerformed
+
+    private void TPPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPPersonasMouseClicked
+        actualizarListaPersonas();
+    }//GEN-LAST:event_TPPersonasMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        personaDao.eliminar(Double.valueOf(IDEliminar.getText()));
+        actualizarListaPersonas();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apellidos1;
@@ -674,4 +710,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+    
+    PersonaDAO personaDao = new PersonaDAO();
+    Persona persona;
+    List<Persona> arrayPersonas = new ArrayList<>();
+    
+    private void actualizarListaPersonas(){
+    ListaPersonas.setText("");
+    arrayPersonas = personaDao.obtenerTodos();
+    for(Persona aux : arrayPersonas){
+        ListaPersonas.append(String.valueOf(aux.getId())
+                            + " -- " + aux.getNombres() 
+                            + " " + aux.getApellidos());
+
+    }
+}   
 }
