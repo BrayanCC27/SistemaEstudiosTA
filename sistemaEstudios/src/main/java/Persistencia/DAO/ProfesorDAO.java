@@ -5,13 +5,19 @@ import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProfesorDAO {
     private PersonaDAO personaDAO;
     private Connection connection;
 
-    public ProfesorDAO() throws SQLException {
-        this.connection = ConexionH2.getInstancia().conectar();
+    public ProfesorDAO(){
+        try {
+            this.connection = ConexionH2.getInstancia().conectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfesorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.personaDAO = new PersonaDAO();
     }
 
@@ -37,8 +43,8 @@ public class ProfesorDAO {
 
     // READ
     public Profesor obtenerPorId(Double id) {
-        String sql = "SELECT p.*, per.nombres, per.apellidos, per.email FROM profesor p " +
-                "JOIN personas per ON p.id = per.id WHERE p.id = ?";
+        String sql = "SELECT p.*, per.nombres, per.apellidos, per.email FROM Profesor p " +
+                "JOIN Persona per ON p.id = per.id WHERE p.id = ?";
 
         try (Connection conn = ConexionH2.getInstancia().conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -67,8 +73,8 @@ public class ProfesorDAO {
     // READ ALL
     public List<Profesor> obtenerTodos() {
         List<Profesor> profesores = new ArrayList<>();
-        String sql = "SELECT p.*, per.nombres, per.apellidos, per.email FROM profesor p " +
-                "JOIN personas per ON p.id = per.id";
+        String sql = "SELECT p.*, per.nombres, per.apellidos, per.email FROM Profesor p " +
+                "JOIN Persona per ON p.id = per.id";
 
         try (Connection conn = ConexionH2.getInstancia().conectar();
              Statement stmt = conn.createStatement();
@@ -114,7 +120,6 @@ public class ProfesorDAO {
 
     // DELETE
     public void eliminar(Double id) {
-        // Delete professor-specific information first
         String sql = "DELETE FROM profesor WHERE id = ?";
 
         try (Connection conn = ConexionH2.getInstancia().conectar();

@@ -6,12 +6,10 @@ import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class EstudianteDAO {
     private PersonaDAO personaDAO = new PersonaDAO();
-    private ProgramaDAO programaDAO;
+    private ProgramaDAO programaDAO = new ProgramaDAO();
 
     // CREATE
     public void crear(Estudiante estudiante) {

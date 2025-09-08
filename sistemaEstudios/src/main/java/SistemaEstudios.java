@@ -9,11 +9,13 @@ import com.sun.jdi.connect.spi.Connection;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SistemaEstudios {
     public static void main(String[] args) throws SQLException {
         SQLbase sqlBase = new SQLbase();
-//        sqlBase.crearBD();
+        sqlBase.crearBD();
 
         ConexionH2 db = ConexionH2.getInstancia();
 

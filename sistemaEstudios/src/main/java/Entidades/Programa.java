@@ -49,7 +49,7 @@ public class Programa {
         this.duracion = duracion;
     }
 
-    public void setRegistro(Date registro) {
+    public void setRegistro(String registro) {
         this.registro = registro;
     }
 

@@ -10,7 +10,7 @@ public class PersonaDAO {
 
     // CREATE
     public void crear(Persona persona) {
-        String sql = "INSERT INTO persona (id, nombres, apellidos, email) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO persona (id, nombres, apellidos, email) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ConexionH2.getInstancia().conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

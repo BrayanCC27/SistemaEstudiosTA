@@ -25,9 +25,7 @@ public class ConexionH2 {
     }
 
     public static ConexionH2 getInstancia() {
-        if (instancia == null) {
-            instancia = new ConexionH2();
-        }
+        instancia = new ConexionH2();
         return instancia;
     }
 
