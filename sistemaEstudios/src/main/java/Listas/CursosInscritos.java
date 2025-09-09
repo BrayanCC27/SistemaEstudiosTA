@@ -3,18 +3,28 @@ package Listas;
 import Entidades.Curso;
 import Entidades.Estudiante;
 import Entidades.Inscripcion;
+import Interfaces.Conexion;
 import Interfaces.Servicios;
+import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CursosInscritos implements Servicios {
     private List<Inscripcion> listado;
-    private Connection connection;
+    private Conexion conexion;
+    private Connection conn;
 
-    public CursosInscritos(Connection connection) {
-        this.connection = connection;
+    public CursosInscritos() {
+        this.conexion =  ConexionH2.getInstancia();
+        try {
+            this.conn = conexion.conectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(CursosInscritos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.listado = new ArrayList<>();
         cargarDatos();
     }
@@ -22,7 +32,7 @@ public class CursosInscritos implements Servicios {
     public void inscribirCurso(Inscripcion inscripcion) {
         try {
             String sql = "INSERT INTO Inscripcion (estudianteID, cursoID, año, semestre) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, inscripcion.getEstudiante().getId().longValue());
             stmt.setInt(2, inscripcion.getCurso().getId());
             stmt.setInt(3, inscripcion.getAnio());
@@ -38,7 +48,7 @@ public class CursosInscritos implements Servicios {
     public void eliminar(Inscripcion inscripcion) {
         try {
             String sql = "DELETE FROM Inscripcion WHERE estudianteID = ? AND cursoID = ? AND año = ? AND semestre = ?";
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, inscripcion.getEstudiante().getId().longValue());
             stmt.setInt(2, inscripcion.getCurso().getId());
             stmt.setInt(3, inscripcion.getAnio());
@@ -70,7 +80,7 @@ public class CursosInscritos implements Servicios {
                     "INNER JOIN Curso c ON i.cursoID = c.ID " +
                     "INNER JOIN Persona p ON i.estudianteID = p.ID " +
                     "INNER JOIN Estudiante e ON i.estudianteID = e.ID";
-            Statement stmt = connection.createStatement();
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 // Crear objetos Estudiante y Curso

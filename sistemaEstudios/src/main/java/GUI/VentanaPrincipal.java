@@ -5,15 +5,11 @@
 package GUI;
 
 import Entidades.*;
+import Listas.*;
 import Persistencia.DAO.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author USUARIO
- */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     /**
@@ -101,6 +97,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         CBCursos = new javax.swing.JComboBox<>();
         BTNInscribirCursoProfesor = new javax.swing.JButton();
         EliminarCursoProfesor = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ListaCursosProfesor = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         ContenedorInscripciones = new javax.swing.JPanel();
         TPInscripciones = new javax.swing.JTabbedPane();
         IncribirIncripcion = new javax.swing.JPanel();
@@ -411,7 +411,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(Promedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BTNIncribirEstudiante)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         TPPrincipal.addTab("Estudiantes", ContenedorEstudiantes);
@@ -496,7 +496,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(TipoContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(BTNIncribirProfesor)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
 
         TPPrincipal.addTab("Profesores", ContenedorProfesores);
@@ -580,20 +580,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(CBCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(BTNInscribirCursoProfesor)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         TPCursoProfesor.addTab("Inscribir", InscribirCursoProfesor);
+
+        ListaCursosProfesor.setEditable(false);
+        ListaCursosProfesor.setColumns(20);
+        ListaCursosProfesor.setRows(5);
+        jScrollPane4.setViewportView(ListaCursosProfesor);
+
+        jLabel33.setText("Lista de Cursos Profesor");
+
+        jLabel34.setText("CURSO - PROFESOR - PERIODO");
 
         javax.swing.GroupLayout EliminarCursoProfesorLayout = new javax.swing.GroupLayout(EliminarCursoProfesor);
         EliminarCursoProfesor.setLayout(EliminarCursoProfesorLayout);
         EliminarCursoProfesorLayout.setHorizontalGroup(
             EliminarCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGroup(EliminarCursoProfesorLayout.createSequentialGroup()
+                .addGroup(EliminarCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EliminarCursoProfesorLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EliminarCursoProfesorLayout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jLabel34)))
+                .addContainerGap(129, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EliminarCursoProfesorLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel33)
+                .addGap(246, 246, 246))
         );
         EliminarCursoProfesorLayout.setVerticalGroup(
             EliminarCursoProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGroup(EliminarCursoProfesorLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         TPCursoProfesor.addTab("Eliminar", EliminarCursoProfesor);
@@ -625,7 +653,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         IncribirIncripcionLayout.setVerticalGroup(
             IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         TPInscripciones.addTab("Inscribir", IncribirIncripcion);
@@ -638,7 +666,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         EliminarIncripcionLayout.setVerticalGroup(
             EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         TPInscripciones.addTab("Eliminar", EliminarIncripcion);
@@ -682,10 +710,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel26)
                         .addGap(14, 14, 14)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(177, 177, 177))
         );
         jPanel1Layout.setVerticalGroup(
@@ -697,7 +725,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         TPPrincipal.addTab("Programas", jPanel1);
@@ -737,7 +765,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         TPPrincipal.addTab("Cursos", jPanel2);
@@ -843,6 +871,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void TPPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPPrincipalMouseClicked
         actualizarListaProgramas();
         actualizarListaCursos();
+        actualizarListaCursosProfesor();
     }//GEN-LAST:event_TPPrincipalMouseClicked
 
     private void TPCursoProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPCursoProfesorMouseClicked
@@ -857,9 +886,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void BTNInscribirCursoProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNInscribirCursoProfesorActionPerformed
         profesor = arrayProfesor.get(CBProfesores.getSelectedIndex());
         int ano = Integer.parseInt(anoCursoProfesor.getText());
-        int semestre = (int) semestreCursoProfesor.getSelectedItem();
+        String semestreString = (String) semestreCursoProfesor.getSelectedItem();
+        int semestreInt = Integer.parseInt(semestreString);
         curso = arrayCurso.get(CBCursos.getSelectedIndex());
-        
+        cursoProfesor = new CursoProfesor(profesor, ano, semestreInt, curso);
+        actualizarListaCursosProfesor();
     }//GEN-LAST:event_BTNInscribirCursoProfesorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -895,6 +926,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel IncripcionPersonas;
     private javax.swing.JPanel InscribirCursoProfesor;
     private javax.swing.JTextArea ListaCursos;
+    private javax.swing.JTextArea ListaCursosProfesor;
     private javax.swing.JTextArea ListaPersonas;
     private javax.swing.JTextArea ListaProgramas;
     private javax.swing.JTextField NombresEstudiante;
@@ -934,6 +966,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -945,6 +979,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox<String> semestreCursoProfesor;
     // End of variables declaration//GEN-END:variables
 
@@ -967,6 +1002,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     CursoDAO cursoDao = new CursoDAO();
     Curso curso;
     List<Curso> arrayCurso = new ArrayList<>();
+    
+    CursosProfesores cursoProfesoresDao = new CursosProfesores();
+    CursoProfesor cursoProfesor;
+    List<CursoProfesor> arrayCursoProfesor = new ArrayList<>();
     
     
     private void actualizarComboBoxCursos() {
@@ -995,6 +1034,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         }
     }
+    
+    private void actualizarListaCursosProfesor() {
+        ListaCursosProfesor.setText("");
+        arrayCursoProfesor = cursoProfesoresDao.getListado();
+        for (CursoProfesor aux : arrayCursoProfesor) {
+            ListaCursosProfesor.append(aux.getCurso().getNombre()
+                    + " -- " + aux.getProfesor().getNombres()+
+                      " -- " + aux.getAno() + "-" + aux.getSemestre() + "\n");
+
+        }
+    }
 
     private void actualizarListaPersonas() {
         ListaPersonas.setText("");
@@ -1016,4 +1066,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         }
     }
+    
 }

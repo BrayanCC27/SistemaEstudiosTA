@@ -31,6 +31,7 @@ Persistencia\SQLbase.class
 Persistencia\DAO\CursoDAO.class
 SistemaEstudios.class
 Entidades\Curso.class
+Interfaces\Conexion.class
 Listas\CursosInscritos.class
 Entidades\CursoProfesor.class
 GUI\VentanaPrincipal$12.class

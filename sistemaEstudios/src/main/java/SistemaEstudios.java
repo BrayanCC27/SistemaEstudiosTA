@@ -1,27 +1,24 @@
-import Entidades.Persona;
 import GUI.VentanaPrincipal;
+import Interfaces.Conexion;
 import Listas.CursosInscritos;
 import Listas.CursosProfesores;
 import Listas.InscripcionesPersonas;
 import Persistencia.ConexionH2;
 import Persistencia.SQLbase;
-import com.sun.jdi.connect.spi.Connection;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SistemaEstudios {
     public static void main(String[] args) throws SQLException {
         SQLbase sqlBase = new SQLbase();
         sqlBase.crearBD();
 
-        ConexionH2 db = ConexionH2.getInstancia();
+        Conexion db = ConexionH2.getInstancia();
 
-        CursosInscritos cursosInscritos = new CursosInscritos(db.conectar());
-        InscripcionesPersonas inscripcionesPersonas = new InscripcionesPersonas(db.conectar());
-        CursosProfesores cursosProfesores = new CursosProfesores(db.conectar());
+        CursosInscritos cursosInscritos = new CursosInscritos();
+        InscripcionesPersonas inscripcionesPersonas = new InscripcionesPersonas();
+        CursosProfesores cursosProfesores = new CursosProfesores();
 
         cursosInscritos.imprimirPosicion("2");
         cursosInscritos.cantidadActual();

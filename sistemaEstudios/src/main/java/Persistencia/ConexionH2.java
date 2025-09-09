@@ -1,10 +1,11 @@
 package Persistencia;
 
+import Interfaces.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexionH2 {
+public class ConexionH2 implements Conexion{
 
     private static String URL;
     private static String USER;
@@ -13,7 +14,7 @@ public class ConexionH2 {
     private static ConexionH2 instancia;
     private Connection conexion;
 
-    public ConexionH2() {
+    private ConexionH2() {
         this.URL = "jdbc:h2:./appDB";
         this.USER = "sa";
         this.PASSWORD = "";
@@ -25,10 +26,13 @@ public class ConexionH2 {
     }
 
     public static ConexionH2 getInstancia() {
-        instancia = new ConexionH2();
+//        if (instancia == null) {
+            instancia = new ConexionH2();
+  //      }
         return instancia;
     }
 
+    @Override
     public Connection conectar() throws SQLException {
         if (conexion == null || conexion.isClosed()) {
             try {
@@ -40,7 +44,8 @@ public class ConexionH2 {
         }
         return conexion;
     }
-
+    
+    @Override
     public void desconectar() {
         if (conexion != null) {
             try {

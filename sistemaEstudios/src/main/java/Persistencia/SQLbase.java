@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SQLbase {
-
     private Connection con;
 
     public SQLbase() {

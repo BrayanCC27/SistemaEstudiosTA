@@ -3,17 +3,27 @@ package Listas;
 import Entidades.Estudiante;
 import Entidades.Persona;
 import Entidades.Profesor;
+import Interfaces.Conexion;
+import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InscripcionesPersonas {
     private List<Persona> listado;
-    private Connection connection;
+    private Conexion conexion;
+    private Connection conn;
 
-    public InscripcionesPersonas(Connection connection) {
-        this.connection = connection;
+    public InscripcionesPersonas() {
+        this.conexion = ConexionH2.getInstancia();
+        try {
+            this.conn = conexion.conectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionesPersonas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.listado = new ArrayList<>();
         cargarDatos();
     }
@@ -22,7 +32,7 @@ public class InscripcionesPersonas {
         try {
             // Primero insertar en tabla Persona
             String sqlPersona = "INSERT INTO Persona (ID, nombres, apellidos, email) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmtPersona = connection.prepareStatement(sqlPersona);
+            PreparedStatement stmtPersona = conn.prepareStatement(sqlPersona);
             stmtPersona.setLong(1, persona.getId().longValue());
             stmtPersona.setString(2, persona.getNombres());
             stmtPersona.setString(3, persona.getApellidos());
@@ -34,7 +44,7 @@ public class InscripcionesPersonas {
             if (persona instanceof Estudiante) {
                 Estudiante est = (Estudiante) persona;
                 String sqlEst = "INSERT INTO Estudiante (ID, codigo, programa_id, activo, promedio) VALUES (?, ?, ?, ?, ?)";
-                PreparedStatement stmtEst = connection.prepareStatement(sqlEst);
+                PreparedStatement stmtEst = conn.prepareStatement(sqlEst);
                 stmtEst.setLong(1, est.getId().longValue());
                 stmtEst.setLong(2, est.getCodigo().longValue());
                 stmtEst.setLong(3, est.getPrograma() != null ? est.getPrograma().getId().longValue() : 0);
@@ -45,7 +55,7 @@ public class InscripcionesPersonas {
             } else if (persona instanceof Profesor) {
                 Profesor prof = (Profesor) persona;
                 String sqlProf = "INSERT INTO Profesor (ID, tipo_contrato) VALUES (?, ?)";
-                PreparedStatement stmtProf = connection.prepareStatement(sqlProf);
+                PreparedStatement stmtProf = conn.prepareStatement(sqlProf);
                 stmtProf.setLong(1, prof.getId().longValue());
                 stmtProf.setString(2, prof.getTipoContrato());
                 stmtProf.executeUpdate();
@@ -61,7 +71,7 @@ public class InscripcionesPersonas {
         try {
             // La eliminación en CASCADE se encarga del resto
             String sql = "DELETE FROM Persona WHERE ID = ?";
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, persona.getId().longValue());
             stmt.executeUpdate();
             stmt.close();
@@ -75,7 +85,7 @@ public class InscripcionesPersonas {
         try {
             // Actualizar tabla Persona
             String sqlPersona = "UPDATE Persona SET nombres = ?, apellidos = ?, email = ? WHERE ID = ?";
-            PreparedStatement stmtPersona = connection.prepareStatement(sqlPersona);
+            PreparedStatement stmtPersona = conn.prepareStatement(sqlPersona);
             stmtPersona.setString(1, persona.getNombres());
             stmtPersona.setString(2, persona.getApellidos());
             stmtPersona.setString(3, persona.getEmail());
@@ -87,7 +97,7 @@ public class InscripcionesPersonas {
             if (persona instanceof Estudiante) {
                 Estudiante est = (Estudiante) persona;
                 String sqlEst = "UPDATE Estudiante SET codigo = ?, programa_id = ?, activo = ?, promedio = ? WHERE ID = ?";
-                PreparedStatement stmtEst = connection.prepareStatement(sqlEst);
+                PreparedStatement stmtEst = conn.prepareStatement(sqlEst);
                 stmtEst.setLong(1, est.getCodigo().longValue());
                 stmtEst.setLong(2, est.getPrograma() != null ? est.getPrograma().getId().longValue() : 0);
                 stmtEst.setBoolean(3, est.getActivo());
@@ -98,7 +108,7 @@ public class InscripcionesPersonas {
             } else if (persona instanceof Profesor) {
                 Profesor prof = (Profesor) persona;
                 String sqlProf = "UPDATE Profesor SET tipo_contrato = ? WHERE ID = ?";
-                PreparedStatement stmtProf = connection.prepareStatement(sqlProf);
+                PreparedStatement stmtProf = conn.prepareStatement(sqlProf);
                 stmtProf.setString(1, prof.getTipoContrato());
                 stmtProf.setLong(2, prof.getId().longValue());
                 stmtProf.executeUpdate();
@@ -119,7 +129,7 @@ public class InscripcionesPersonas {
         try {
             String sql = "SELECT p.ID, p.nombres, p.apellidos, p.email, e.codigo, e.programa_id, e.activo, e.promedio " +
                     "FROM Persona p INNER JOIN Estudiante e ON p.ID = e.ID";
-            Statement stmt = connection.createStatement();
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Estudiante est = new Estudiante(
@@ -144,7 +154,7 @@ public class InscripcionesPersonas {
         try {
             String sql = "SELECT p.ID, p.nombres, p.apellidos, p.email, pr.tipo_contrato " +
                     "FROM Persona p INNER JOIN Profesor pr ON p.ID = pr.ID";
-            Statement stmt = connection.createStatement();
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Profesor prof = new Profesor(
