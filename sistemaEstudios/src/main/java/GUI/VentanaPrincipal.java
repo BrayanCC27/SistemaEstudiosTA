@@ -10,52 +10,13 @@ import Persistencia.DAO.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controlador.ControladorPersonas;
-import Controlador.ControladorEstudiantes;
-import Entidades.*;
-import Listas.CursosProfesores;
-import Persistencia.DAO.*;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Ventana principal refactorizada siguiendo el patrón MVC
- * Ahora actúa como un coordinador que delega a paneles específicos
- */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
-    // Paneles específicos para cada funcionalidad
-    private JPanelPersonas panelPersonas;
-    private JPanelEstudiantes panelEstudiantes;
-    
-    // Controladores específicos
-    private ControladorPersonas controladorPersonas;
-    private ControladorEstudiantes controladorEstudiantes;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-        inicializarPanelesYControladores();
-    }
-    
-    /**
-     * Inicializa los paneles específicos y sus controladores
-     * Aplica el patrón Creator - VentanaPrincipal es responsable de crear sus componentes
-     */
-    private void inicializarPanelesYControladores() {
-        // Crear paneles específicos
-        panelPersonas = new JPanelPersonas();
-        panelEstudiantes = new JPanelEstudiantes();
-        
-        // Crear controladores específicos
-        controladorPersonas = new ControladorPersonas(panelPersonas);
-        controladorEstudiantes = new ControladorEstudiantes(panelEstudiantes);
-        
-        // Asignar controladores a las vistas
-        panelPersonas.setControlador(controladorPersonas);
-        panelEstudiantes.setControlador(controladorEstudiantes);
     }
 
     /**
@@ -67,30 +28,97 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         ContenedorPrincipal = new javax.swing.JPanel();
         TPPrincipal = new javax.swing.JTabbedPane();
-        
-        // Los demás paneles temporalmente mantendremos algunos por compatibilidad
+        ContenedorPersonas = new javax.swing.JPanel();
+        TPPersonas = new javax.swing.JTabbedPane();
+        IncripcionPersonas = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        BTNIncribirPersona = new javax.swing.JButton();
+        IDPersona = new javax.swing.JTextField();
+        NombresPersona = new javax.swing.JTextField();
+        EmailPersona = new javax.swing.JTextField();
+        ApellidosPersona = new javax.swing.JTextField();
+        EliminarPersonas = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListaPersonas = new javax.swing.JTextArea();
+        jLabel14 = new javax.swing.JLabel();
+        IDEliminar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        ContenedorEstudiantes = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        IDEstudiante = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        NombresEstudiante = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        ApellidosEstudiante = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        EmailEstudiante = new javax.swing.JTextField();
+        BTNIncribirEstudiante = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        CBActivo = new javax.swing.JCheckBox();
+        jLabel18 = new javax.swing.JLabel();
+        Promedio = new javax.swing.JTextField();
+        IDPrograma = new javax.swing.JTextField();
+        Codigo = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        ContenedorProfesores = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        IDProfesor = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        NombresProfesor = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        ApellidosProfesor = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        EmailProfesor = new javax.swing.JTextField();
+        BTNIncribirProfesor = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        TipoContrato = new javax.swing.JComboBox<>();
         ContenedorCursoProfesor = new javax.swing.JPanel();
         TPCursoProfesor = new javax.swing.JTabbedPane();
         InscribirCursoProfesor = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        CBProfesores = new javax.swing.JComboBox<>();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        anoCursoProfesor = new javax.swing.JTextField();
+        semestreCursoProfesor = new javax.swing.JComboBox<>();
+        CBCursos = new javax.swing.JComboBox<>();
+        BTNInscribirCursoProfesor = new javax.swing.JButton();
         EliminarCursoProfesor = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ListaCursosProfesor = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
         ContenedorInscripciones = new javax.swing.JPanel();
         TPInscripciones = new javax.swing.JTabbedPane();
         IncribirIncripcion = new javax.swing.JPanel();
         EliminarIncripcion = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-
-        // Configuración básica de componentes que mantuvimos
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListaProgramas = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ListaCursos = new javax.swing.JTextArea();
+
+        jLabel4.setText("jLabel4");
+
+        jLabel6.setText("jLabel6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,9 +131,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        // Agregar los nuevos paneles refactorizados
-        TPPrincipal.addTab("Personas", panelPersonas);
-        TPPrincipal.addTab("Estudiantes", panelEstudiantes);
+        TPPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TPPersonasMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setText("ID");
+
+        jLabel2.setText("Nombres");
+
+        jLabel3.setText("Apellidos");
+
+        jLabel5.setText("Email");
+
+        BTNIncribirPersona.setText("Incribir");
+        BTNIncribirPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNIncribirPersonaActionPerformed(evt);
+            }
+        });
+
+        IDPersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IDPersonaKeyTyped(evt);
+            }
+        });
+
+        NombresPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombresPersonaActionPerformed(evt);
+            }
+        });
+
+        EmailPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailPersonaActionPerformed(evt);
+            }
+        });
+
+        ApellidosPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApellidosPersonaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout IncripcionPersonasLayout = new javax.swing.GroupLayout(IncripcionPersonas);
         IncripcionPersonas.setLayout(IncripcionPersonasLayout);
