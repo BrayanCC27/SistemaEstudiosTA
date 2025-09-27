@@ -5,10 +5,6 @@ import Entidades.Profesor;
 import Persistencia.DAO.ProfesorDAO;
 import javax.swing.JOptionPane;
 
-/**
- * Controlador específico para el manejo de Profesores
- * Aplica el patrón Controller de GRASP
- */
 public class ControladorProfesores {
     
     private JPanelProfesores vista;

@@ -1,16 +1,14 @@
 package Entidades;
 
-import java.util.Date;
-
 public class Programa {
-    private Double Id;
+    private Double id;
     private String nombre;
     private Double duracion;
     private String registro;
     private Facultad facultad;
 
     public Programa(Double id, String nombre, Double duracion, String registro, Facultad facultad) {
-        this.Id = id;
+        this.id = id;
         this.nombre = nombre;
         this.duracion = duracion;
         this.registro = registro;
@@ -18,7 +16,7 @@ public class Programa {
     }
 
     public Double getId() {
-        return Id;
+        return id;
     }
 
     public String getNombre() {
@@ -38,7 +36,7 @@ public class Programa {
     }
 
     public void setId(Double id) {
-        Id = id;
+        this.id = id;
     }
 
     public void setNombre(String nombre) {
@@ -60,7 +58,7 @@ public class Programa {
     @Override
     public String toString() {
         return "Programa{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", duracion=" + duracion +
                 ", registro=" + registro +
