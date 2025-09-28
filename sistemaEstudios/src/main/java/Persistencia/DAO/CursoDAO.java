@@ -10,7 +10,6 @@ import java.util.*;
 public class CursoDAO {
     private ProgramaDAO programaDAO = new ProgramaDAO();
 
-    // CREATE
     public void crear(Curso curso) {
         String sql = "INSERT INTO curso (id, nombre, programa_id, activo) VALUES (?, ?, ?, ?)";
 

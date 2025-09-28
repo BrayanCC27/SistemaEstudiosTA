@@ -47,7 +47,7 @@ public class SistemaEstudios {
         if (cursosInscritos.cantidadActual() > 0) {
             System.out.println("Primera inscripción: " + cursosInscritos.imprimirPosicion("0"));
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaPrincipal().setVisible(true);
