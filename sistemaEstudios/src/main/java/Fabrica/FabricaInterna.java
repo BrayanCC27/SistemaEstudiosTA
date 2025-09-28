@@ -2,6 +2,8 @@ package Fabrica;
 
 import Entidades.*;
 import Interfaces.Conexion;
+import Listas.CursosInscritos;
+import Listas.CursosProfesores;
 import Persistencia.ConexionH2;
 import Persistencia.DAO.*;
 
@@ -80,6 +82,14 @@ public class FabricaInterna {
 
     public static ProgramaDAO obtenerProgramaDAO() {
         return new ProgramaDAO();
+    }
+    
+    public static CursosInscritos obtenerCursosInscritos() {
+        return new CursosInscritos();
+    }
+    
+    public static CursosProfesores obtenerCursosProfesores() {
+        return new CursosProfesores();
     }
     
     public static Conexion obtenerConexion(){

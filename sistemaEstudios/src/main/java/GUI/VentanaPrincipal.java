@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
-import Entidades.*;
-import Listas.*;
-import Persistencia.DAO.*;
-import java.util.ArrayList;
+import Controller.*;
+import DTO.*;
 import java.util.List;
+import Fabrica.FabricaExterna;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaPrincipal
-     */
     public VentanaPrincipal() {
         initComponents();
     }
@@ -809,12 +801,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNIncribirPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIncribirPersonaActionPerformed
-        // TODO add your handling code here:
+
         Double id = Double.valueOf(IDPersona.getText());
         String nombres = NombresPersona.getText();
         String apellidos = ApellidosPersona.getText();
         String email = EmailPersona.getText();
-        persona = new Persona(id, nombres, apellidos, email);
+        persona = FabricaExterna.obtenerPersonaDTO(id, nombres, apellidos, email);
+        personaCon.crear(persona);
     }//GEN-LAST:event_BTNIncribirPersonaActionPerformed
 
     private void BTNIncribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNIncribirEstudianteActionPerformed
@@ -823,12 +816,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String apellidos = ApellidosEstudiante.getText();
         String email = EmailEstudiante.getText();
         Double codigo = Double.valueOf(Codigo.getText());
-        programa = programaDao.obtenerPorId(Double.valueOf(IDPrograma.getText()));
+        double idPrograma= Double.parseDouble(IDPrograma.getText());
         boolean activo = CBActivo.isSelected();
         Double promedio = Double.valueOf(Promedio.getText());
 
-        estudiante = new Estudiante(id, nombres, apellidos, email, codigo, programa, activo, promedio);
-        estudianteDao.crear(estudiante);
+        estudiante = FabricaExterna.obtenerEstudianteDTO(id, nombres, apellidos, email, codigo, activo, promedio, idPrograma , "");
+        estudianteCon.crear(estudiante);
 
     }//GEN-LAST:event_BTNIncribirEstudianteActionPerformed
 
@@ -839,8 +832,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String email = EmailProfesor.getText();
         String tipoContrato = (String) TipoContrato.getSelectedItem();
 
-        profesor = new Profesor(id, nombres, apellidos, email, tipoContrato);
-        profesorDao.crear(profesor);
+        profesor = FabricaExterna.obtenerProfesorDTO(id, nombres, apellidos, email, tipoContrato);
+        profesorCon.crear(profesor);
     }//GEN-LAST:event_BTNIncribirProfesorActionPerformed
 
     private void IDPersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDPersonaKeyTyped
@@ -864,7 +857,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TPPersonasMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        personaDao.eliminar(Double.valueOf(IDEliminar.getText()));
+        personaCon.eliminar(Double.parseDouble(IDEliminar.getText()));
         actualizarListaPersonas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -889,7 +882,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String semestreString = (String) semestreCursoProfesor.getSelectedItem();
         int semestreInt = Integer.parseInt(semestreString);
         curso = arrayCurso.get(CBCursos.getSelectedIndex());
-        cursoProfesor = new CursoProfesor(profesor, ano, semestreInt, curso);
+        cursoProfesor = FabricaExterna.obtenerCursoProfesorDTO(PROPERTIES, semestreString, semestreString, ano, semestreInt, ERROR, semestreString);
         actualizarListaCursosProfesor();
     }//GEN-LAST:event_BTNInscribirCursoProfesorActionPerformed
 
@@ -983,64 +976,64 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> semestreCursoProfesor;
     // End of variables declaration//GEN-END:variables
 
-    PersonaDAO personaDao = new PersonaDAO();
-    Persona persona;
-    List<Persona> arrayPersona = new ArrayList<>();
+    PersonaController personaCon = FabricaExterna.obtenerPersonaController();
+    PersonaDTO persona;
+    List<PersonaDTO> arrayPersona = FabricaExterna.obtenerArray();
 
-    EstudianteDAO estudianteDao = new EstudianteDAO();
-    Estudiante estudiante;
-    List<Estudiante> arrayEstudiante = new ArrayList<>();
+    EstudianteController estudianteCon = FabricaExterna.obtenerEstudianteController();
+    EstudianteDTO estudiante;
+    List<EstudianteDTO> arrayEstudiante = FabricaExterna.obtenerArray();
 
-    ProfesorDAO profesorDao = new ProfesorDAO();
-    Profesor profesor;
-    List<Profesor> arrayProfesor = new ArrayList<>();
+    ProfesorController profesorCon = FabricaExterna.obtenerProfesorController();
+    ProfesorDTO profesor;
+    List<ProfesorDTO> arrayProfesor = FabricaExterna.obtenerArray();
 
-    ProgramaDAO programaDao = new ProgramaDAO();
-    Programa programa;
-    List<Programa> arrayPrograma = new ArrayList<>();
+    ProgramaController programaCon = FabricaExterna.obtenerProgramaController();
+    ProgramaDTO programa;
+    List<ProgramaDTO> arrayPrograma = FabricaExterna.obtenerArray();
 
-    CursoDAO cursoDao = new CursoDAO();
-    Curso curso;
-    List<Curso> arrayCurso = new ArrayList<>();
+    CursoController cursoCon = FabricaExterna.obtenerCursoController();
+    CursoDTO curso;
+    List<CursoDTO> arrayCurso = FabricaExterna.obtenerArray();
     
-    CursosProfesores cursoProfesoresDao = new CursosProfesores();
-    CursoProfesor cursoProfesor;
-    List<CursoProfesor> arrayCursoProfesor = new ArrayList<>();
+    CursoProfesorController cursoProfesorCon = FabricaExterna.obtenerCursoProfesorController();
+    CursoProfesorDTO cursoProfesor;
+    List<CursoProfesorDTO> arrayCursoProfesor = FabricaExterna.obtenerArray();
     
     
     private void actualizarComboBoxCursos() {
         CBCursos.removeAllItems();
-        arrayCurso = cursoDao.obtenerTodos();
-        for (Curso aux : arrayCurso) {
+        arrayCurso = cursoCon.obtenerTodos();
+        for (CursoDTO aux : arrayCurso) {
             CBCursos.addItem(aux.getNombre());
         }
     }
     
     private void actualizarComboBoxProfesores() {
         CBProfesores.removeAllItems();
-        arrayProfesor = profesorDao.obtenerTodos();
-        for (Profesor aux : arrayProfesor) {
+        arrayProfesor = profesorCon.obtenerTodos();
+        for (ProfesorDTO aux : arrayProfesor) {
             CBProfesores.addItem(aux.getNombres());
         }
     }
     
     private void actualizarListaCursos() {
         ListaCursos.setText("");
-        arrayCurso = cursoDao.obtenerTodos();
-        for (Curso aux : arrayCurso) {
+        arrayCurso = cursoCon.obtenerTodos();
+        for (CursoDTO aux : arrayCurso) {
             ListaCursos.append(String.valueOf(aux.getId())
                     + " -- " + aux.getNombre() +
-                      " -- " + aux.getPrograma().getNombre() + "\n");
+                      " -- " + aux.getProgramaNombre() + "\n");
 
         }
     }
     
     private void actualizarListaCursosProfesor() {
         ListaCursosProfesor.setText("");
-        arrayCursoProfesor = cursoProfesoresDao.getListado();
-        for (CursoProfesor aux : arrayCursoProfesor) {
-            ListaCursosProfesor.append(aux.getCurso().getNombre()
-                    + " -- " + aux.getProfesor().getNombres()+
+        arrayCursoProfesor = cursoProfesorCon.getListado();
+        for (CursoProfesorDTO aux : arrayCursoProfesor) {
+            ListaCursosProfesor.append(aux.getCursoNombre()
+                    + " -- " + aux.getProfesorNombres()+
                       " -- " + aux.getAno() + "-" + aux.getSemestre() + "\n");
 
         }
@@ -1048,8 +1041,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void actualizarListaPersonas() {
         ListaPersonas.setText("");
-        arrayPersona = personaDao.obtenerTodos();
-        for (Persona aux : arrayPersona) {
+        arrayPersona = personaCon.obtenerTodos();
+        for (PersonaDTO aux : arrayPersona) {
             ListaPersonas.append(String.valueOf(aux.getId())
                     + " -- " + aux.getNombres()
                     + " " + aux.getApellidos() + "\n");
@@ -1059,8 +1052,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void actualizarListaProgramas() {
         ListaProgramas.setText("");
-        arrayPrograma = programaDao.obtenerTodos();
-        for (Programa aux : arrayPrograma) {
+        arrayPrograma = programaCon.obtenerTodos();
+        for (ProgramaDTO aux : arrayPrograma) {
             ListaProgramas.append(String.valueOf(aux.getId())
                     + " -- " + aux.getNombre() + "\n");
 

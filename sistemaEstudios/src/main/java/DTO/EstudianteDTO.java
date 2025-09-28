@@ -102,7 +102,7 @@ public class EstudianteDTO {
         this.programaNombre = programaNombre;
     }
 
-    public static EstudianteDTO fromEntity(Estudiante e) {
+    public static EstudianteDTO toDTO(Estudiante e) {
         if (e == null) {
             return null;
         }

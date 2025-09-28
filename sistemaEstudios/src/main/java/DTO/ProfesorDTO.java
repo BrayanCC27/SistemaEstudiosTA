@@ -61,7 +61,7 @@ public class ProfesorDTO {
         this.tipoContrato = tipoContrato;
     }
 
-    public static ProfesorDTO fromEntity(Profesor p) {
+    public static ProfesorDTO toDTO(Profesor p) {
         if (p == null) {
             return null;
         }

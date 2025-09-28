@@ -83,7 +83,7 @@ public class InscripcionDTO {
         this.estudianteApellidos = estudianteApellidos;
     }
 
-    public static InscripcionDTO fromEntity(Inscripcion i) {
+    public static InscripcionDTO toDTO(Inscripcion i) {
         if (i == null) {
             return null;
         }

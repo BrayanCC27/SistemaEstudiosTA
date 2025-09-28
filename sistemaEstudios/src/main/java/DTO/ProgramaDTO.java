@@ -72,7 +72,7 @@ public class ProgramaDTO {
         this.facultadNombre = facultadNombre;
     }
 
-    public static ProgramaDTO fromEntity(Programa p) {
+    public static ProgramaDTO toDTO(Programa p) {
         if (p == null) {
             return null;
         }

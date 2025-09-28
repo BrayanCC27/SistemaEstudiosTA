@@ -11,7 +11,7 @@ public class CursoDTO {
     private Double programaId;
     private String programaNombre;
 
-    public CursoDTO(int id, String nombre, boolean activo, Double programaId, String programaNombre) {
+    public CursoDTO(int id, String nombre, Double programaId, String programaNombre, boolean activo) {
         this.id = id;
         this.nombre = nombre;
         this.activo = activo;
@@ -62,7 +62,7 @@ public class CursoDTO {
         this.programaNombre = programaNombre;
     }
 
-    public static CursoDTO fromEntity(Curso c) {
+    public static CursoDTO toDTO(Curso c) {
         if (c == null) {
             return null;
         }

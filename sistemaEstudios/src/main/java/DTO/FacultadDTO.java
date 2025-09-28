@@ -62,7 +62,7 @@ public class FacultadDTO {
         this.decanoApellidos = decanoApellidos;
     }
 
-    public static FacultadDTO fromEntity(Facultad f) {
+    public static FacultadDTO toDTO(Facultad f) {
         if (f == null) {
             return null;
         }

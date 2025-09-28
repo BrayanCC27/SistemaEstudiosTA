@@ -51,7 +51,7 @@ public class PersonaDTO {
         this.email = email;
     }
 
-    public static PersonaDTO fromEntity(Persona p) {
+    public static PersonaDTO toDTO(Persona p) {
         if (p == null) {
             return null;
         }

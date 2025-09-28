@@ -87,7 +87,7 @@ public class CursoProfesorDTO {
         this.cursoNombre = cursoNombre;
     }
 
-    public static CursoProfesorDTO fromEntity(CursoProfesor cp) {
+    public static CursoProfesorDTO toDTO(CursoProfesor cp) {
         if (cp == null) {
             return null;
         }
