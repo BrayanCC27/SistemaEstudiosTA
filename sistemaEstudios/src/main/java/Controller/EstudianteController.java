@@ -15,7 +15,7 @@ public class EstudianteController {
 
     public EstudianteController() {
         this.estudianteDAO = FabricaInterna.obtenerEstudianteDAO();
-        this.estudianteDAO = FabricaInterna.obtenerEstudianteDAO();
+        this.programaDAO = FabricaInterna.obtenerProgramaDAO();
     }
 
     public void crear(EstudianteDTO estudianteDTO) {

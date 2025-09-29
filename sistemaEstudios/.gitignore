@@ -40,6 +40,8 @@ build/
 # H2DB
 *.mv.db
 *.trace.db
+*.db
+*.mv
 
 # archivos adicionales
 *.txt

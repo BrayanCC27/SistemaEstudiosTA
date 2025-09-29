@@ -72,7 +72,7 @@ public class EstudianteDAO {
     public List<Estudiante> obtenerTodos() {
         List<Estudiante> estudiantes = new ArrayList<>();
         String sql = "SELECT e.*, p.nombres, p.apellidos, p.email FROM estudiante e " +
-                "JOIN personas p ON e.id = p.id";
+                "JOIN persona p ON e.id = p.id";
 
         try (Connection conn = ConexionH2.getInstancia().conectar();
              Statement stmt = conn.createStatement();
