@@ -1,6 +1,9 @@
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\DTO\InscripcionDTO.java
+C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Utils\Configuracion.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Controller\PersonaController.java
+C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Vista\ConsolaPrincipal.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Entidades\Curso.java
+C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Interfaces\VistaGenerica.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Persistencia\DAO\ProfesorDAO.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\DTO\FacultadDTO.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Entidades\Estudiante.java
@@ -32,7 +35,7 @@ C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\jav
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Fabrica\FabricaExterna.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Interfaces\Servicios.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\DTO\CursoDTO.java
-C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\GUI\VentanaPrincipal.java
+C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Vista\VentanaPrincipal.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Controller\EstudianteController.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\DTO\ProgramaDTO.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Controller\ProfesorController.java

@@ -1,13 +1,14 @@
-package GUI;
+package Vista;
 
 import Controller.*;
 import DTO.*;
 import Fabrica.FabricaExterna;
+import Interfaces.VistaGenerica;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsolaPrincipal {
+public class ConsolaPrincipal implements VistaGenerica {
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -19,11 +20,7 @@ public class ConsolaPrincipal {
     private final CursoController cursoCon = FabricaExterna.obtenerCursoController();
     private final CursoProfesorController cursoProfesorCon = FabricaExterna.obtenerCursoProfesorController();
 
-    public static void main(String[] args) {
-        new ConsolaPrincipal().run();
-    }
-
-    private void run() {
+    public void iniciar() {
         boolean running = true;
         while (running) {
             printMainMenu();

@@ -1,11 +1,12 @@
-package GUI;
+package Vista;
 
 import Controller.*;
 import DTO.*;
 import java.util.List;
 import Fabrica.FabricaExterna;
+import Interfaces.VistaGenerica;
 
-public class VentanaPrincipal extends javax.swing.JFrame {
+public class VentanaPrincipal extends javax.swing.JFrame implements VistaGenerica {
 
     public VentanaPrincipal() {
         initComponents();
@@ -816,11 +817,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String apellidos = ApellidosEstudiante.getText();
         String email = EmailEstudiante.getText();
         Double codigo = Double.valueOf(Codigo.getText());
-        double idPrograma= Double.parseDouble(IDPrograma.getText());
+        double idPrograma = Double.parseDouble(IDPrograma.getText());
         boolean activo = CBActivo.isSelected();
         Double promedio = Double.valueOf(Promedio.getText());
 
-        estudiante = FabricaExterna.obtenerEstudianteDTO(id, nombres, apellidos, email, codigo, activo, promedio, idPrograma , "");
+        estudiante = FabricaExterna.obtenerEstudianteDTO(id, nombres, apellidos, email, codigo, activo, promedio, idPrograma, "");
         estudianteCon.crear(estudiante);
 
     }//GEN-LAST:event_BTNIncribirEstudianteActionPerformed
@@ -995,12 +996,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     CursoController cursoCon = FabricaExterna.obtenerCursoController();
     CursoDTO curso;
     List<CursoDTO> arrayCurso = FabricaExterna.obtenerArray();
-    
+
     CursoProfesorController cursoProfesorCon = FabricaExterna.obtenerCursoProfesorController();
     CursoProfesorDTO cursoProfesor;
     List<CursoProfesorDTO> arrayCursoProfesor = FabricaExterna.obtenerArray();
-    
-    
+
     private void actualizarComboBoxCursos() {
         CBCursos.removeAllItems();
         arrayCurso = cursoCon.obtenerTodos();
@@ -1008,7 +1008,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             CBCursos.addItem(aux.getNombre());
         }
     }
-    
+
     private void actualizarComboBoxProfesores() {
         CBProfesores.removeAllItems();
         arrayProfesor = profesorCon.obtenerTodos();
@@ -1016,25 +1016,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             CBProfesores.addItem(aux.getNombres());
         }
     }
-    
+
     private void actualizarListaCursos() {
         ListaCursos.setText("");
         arrayCurso = cursoCon.obtenerTodos();
         for (CursoDTO aux : arrayCurso) {
             ListaCursos.append(String.valueOf(aux.getId())
-                    + " -- " + aux.getNombre() +
-                      " -- " + aux.getProgramaNombre() + "\n");
+                    + " -- " + aux.getNombre()
+                    + " -- " + aux.getProgramaNombre() + "\n");
 
         }
     }
-    
+
     private void actualizarListaCursosProfesor() {
         ListaCursosProfesor.setText("");
         arrayCursoProfesor = cursoProfesorCon.getListado();
         for (CursoProfesorDTO aux : arrayCursoProfesor) {
             ListaCursosProfesor.append(aux.getCursoNombre()
-                    + " -- " + aux.getProfesorNombres()+
-                      " -- " + aux.getAno() + "-" + aux.getSemestre() + "\n");
+                    + " -- " + aux.getProfesorNombres()
+                    + " -- " + aux.getAno() + "-" + aux.getSemestre() + "\n");
 
         }
     }
@@ -1059,5 +1059,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         }
     }
-    
+
+    @Override
+    public void iniciar() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+    }
+
 }
