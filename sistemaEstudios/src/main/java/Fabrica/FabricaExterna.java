@@ -9,6 +9,8 @@ import Controller.PersonaController;
 import Controller.ProfesorController;
 import Controller.ProgramaController;
 import DTO.*;
+import Persistencia.SQLbase;
+import Utils.LectorTxt;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,4 +111,9 @@ public class FabricaExterna {
     public static <T> List<T> obtenerArray() {
         return new ArrayList<>();
     }
+    
+    public static SQLbase obtenerSQLbase(){
+        return new SQLbase();
+    }
+   
 }

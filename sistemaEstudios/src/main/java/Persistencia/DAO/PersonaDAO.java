@@ -1,18 +1,24 @@
 package Persistencia.DAO;
 
 import Entidades.Persona;
-import Persistencia.ConexionH2;
+import Fabrica.FabricaInterna;
+import Interfaces.Conexion;
 
 import java.sql.*;
 import java.util.*;
 
 public class PersonaDAO {
+    private Conexion conexion;
+    
+    public PersonaDAO() {
+        conexion = FabricaInterna.obtenerConexion();
+    }
 
-    // CREATE
+
     public void crear(Persona persona) {
         String sql = "INSERT INTO persona (id, nombres, apellidos, email) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, persona.getId());
@@ -31,7 +37,7 @@ public class PersonaDAO {
     public Persona obtenerPorId(Double id) {
         String sql = "SELECT * FROM persona WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);
@@ -59,7 +65,7 @@ public class PersonaDAO {
         List<Persona> personas = new ArrayList<>();
         String sql = "SELECT * FROM persona";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -83,7 +89,7 @@ public class PersonaDAO {
     public void actualizar(Persona persona) {
         String sql = "UPDATE persona SET nombres = ?, apellidos = ?, email = ? WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, persona.getNombres());
@@ -102,7 +108,7 @@ public class PersonaDAO {
     public void eliminar(Double id) {
         String sql = "DELETE FROM persona WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);

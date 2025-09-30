@@ -2,19 +2,25 @@ package Persistencia.DAO;
 
 import Entidades.Curso;
 import Entidades.Programa;
-import Persistencia.ConexionH2;
-
+import Fabrica.FabricaInterna;
+import Interfaces.Conexion;
 import java.sql.*;
 import java.util.*;
 
 public class CursoDAO {
-    private ProgramaDAO programaDAO = new ProgramaDAO();
+
+    private ProgramaDAO programaDAO;
+    private Conexion conexion;
+
+    public CursoDAO() {
+        programaDAO = FabricaInterna.obtenerProgramaDAO();
+        conexion = FabricaInterna.obtenerConexion();
+    }
 
     public void crear(Curso curso) {
         String sql = "INSERT INTO curso (id, nombre, programa_id, activo) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, curso.getId());
             stmt.setString(2, curso.getNombre());
@@ -32,8 +38,7 @@ public class CursoDAO {
     public Curso obtenerPorId(Integer id) {
         String sql = "SELECT * FROM curso WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
 
@@ -62,9 +67,7 @@ public class CursoDAO {
         List<Curso> cursos = new ArrayList<>();
         String sql = "SELECT * FROM curso";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = conexion.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Programa programa = programaDAO.obtenerPorId(rs.getDouble("programa_id"));
@@ -88,8 +91,7 @@ public class CursoDAO {
     public void actualizar(Curso curso) {
         String sql = "UPDATE curso SET nombre = ?, programa_id = ?, activo = ? WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, curso.getNombre());
             stmt.setDouble(2, curso.getPrograma().getId());
@@ -107,8 +109,7 @@ public class CursoDAO {
     public void eliminar(Integer id) {
         String sql = "DELETE FROM curso WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();

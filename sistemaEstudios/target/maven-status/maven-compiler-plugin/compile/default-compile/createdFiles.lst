@@ -12,6 +12,7 @@ Vista\VentanaPrincipal$11.class
 Fabrica\FabricaExterna.class
 Persistencia\DAO\ProfesorDAO.class
 Vista\VentanaPrincipal$5.class
+Persistencia\ConexionBD.class
 Vista\VentanaPrincipal$2.class
 Vista\VentanaPrincipal$14.class
 Entidades\Facultad.class
@@ -35,7 +36,6 @@ Listas\CursosProfesores.class
 Vista\VentanaPrincipal$10.class
 Entidades\Profesor.class
 Vista\VentanaPrincipal$7.class
-Persistencia\ConexionH2.class
 Controller\PersonaController.class
 Vista\VentanaPrincipal.class
 Persistencia\DAO\FacultadDAO.class
@@ -44,6 +44,7 @@ Controller\EstudianteController.class
 DTO\PersonaDTO.class
 Vista\VentanaPrincipal$3.class
 Utils\Configuracion.class
+Utils\LectorTxt.class
 Fabrica\FabricaInterna.class
 Controller\ProfesorController.class
 Interfaces\Servicios.class

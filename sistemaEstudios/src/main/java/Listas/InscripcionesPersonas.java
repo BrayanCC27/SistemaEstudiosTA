@@ -3,8 +3,8 @@ package Listas;
 import Entidades.Estudiante;
 import Entidades.Persona;
 import Entidades.Profesor;
+import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
-import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class InscripcionesPersonas {
     private Connection conn;
 
     public InscripcionesPersonas() {
-        this.conexion = ConexionH2.getInstancia();
+        this.conexion = FabricaInterna.obtenerConexion();
         try {
             this.conn = conexion.conectar();
         } catch (SQLException ex) {

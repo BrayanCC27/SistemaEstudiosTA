@@ -3,9 +3,9 @@ package Listas;
 import Entidades.Curso;
 import Entidades.Estudiante;
 import Entidades.Inscripcion;
+import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
 import Interfaces.Servicios;
-import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class CursosInscritos implements Servicios {
     private Connection conn;
 
     public CursosInscritos() {
-        this.conexion =  ConexionH2.getInstancia();
+        this.conexion =  FabricaInterna.obtenerConexion();
         try {
             this.conn = conexion.conectar();
         } catch (SQLException ex) {
@@ -31,7 +31,7 @@ public class CursosInscritos implements Servicios {
 
     public void inscribirCurso(Inscripcion inscripcion) {
         try {
-            String sql = "INSERT INTO Inscripcion (estudianteID, cursoID, año, semestre) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Inscripcion (estudianteID, cursoID, anio, semestre) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, inscripcion.getEstudiante().getId().longValue());
             stmt.setInt(2, inscripcion.getCurso().getId());
@@ -47,7 +47,7 @@ public class CursosInscritos implements Servicios {
 
     public void eliminar(Inscripcion inscripcion) {
         try {
-            String sql = "DELETE FROM Inscripcion WHERE estudianteID = ? AND cursoID = ? AND año = ? AND semestre = ?";
+            String sql = "DELETE FROM Inscripcion WHERE estudianteID = ? AND cursoID = ? AND anio = ? AND semestre = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, inscripcion.getEstudiante().getId().longValue());
             stmt.setInt(2, inscripcion.getCurso().getId());
@@ -73,7 +73,7 @@ public class CursosInscritos implements Servicios {
     public void cargarDatos() {
         listado.clear();
         try {
-            String sql = "SELECT i.estudianteID, i.cursoID, i.año, i.semestre, " +
+            String sql = "SELECT i.estudianteID, i.cursoID, i.anio, i.semestre, " +
                     "c.nombre as curso_nombre, c.activo, c.programa_id, " +
                     "p.nombres, p.apellidos, p.email, e.codigo, e.promedio " +
                     "FROM Inscripcion i " +
@@ -104,7 +104,7 @@ public class CursosInscritos implements Servicios {
 
                 Inscripcion inscripcion = new Inscripcion(
                         curso,
-                        rs.getInt("año"),
+                        rs.getInt("anio"),
                         rs.getInt("semestre"),
                         estudiante
                 );

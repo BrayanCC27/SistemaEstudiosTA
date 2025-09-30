@@ -3,9 +3,9 @@ package Listas;
 import Entidades.Curso;
 import Entidades.CursoProfesor;
 import Entidades.Profesor;
+import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
 import Interfaces.Servicios;
-import Persistencia.ConexionH2;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class CursosProfesores implements Servicios {
     private Connection conn;
 
     public CursosProfesores() {
-        this.conexion = ConexionH2.getInstancia();
+        this.conexion = FabricaInterna.obtenerConexion();
         try {
             this.conn = conexion.conectar();
         } catch (SQLException ex) {
@@ -31,7 +31,7 @@ public class CursosProfesores implements Servicios {
 
     public void inscribir(CursoProfesor cursoProfesor) {
         try {
-            String sql = "INSERT INTO CursoProfesor (cursoID, profesorID, año, semestre) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO CursoProfesor (cursoID, profesorID, anio, semestre) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, cursoProfesor.getCurso().getId());
             stmt.setLong(2, cursoProfesor.getProfesor().getId().longValue());
@@ -47,7 +47,7 @@ public class CursosProfesores implements Servicios {
 
     public void eliminar(CursoProfesor cursoProfesor) {
         try {
-            String sql = "DELETE FROM CursoProfesor WHERE cursoID = ? AND profesorID = ? AND año = ? AND semestre = ?";
+            String sql = "DELETE FROM CursoProfesor WHERE cursoID = ? AND profesorID = ? AND anio = ? AND semestre = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, cursoProfesor.getCurso().getId());
             stmt.setLong(2, cursoProfesor.getProfesor().getId().longValue());
@@ -73,7 +73,7 @@ public class CursosProfesores implements Servicios {
     public void cargarDatos() {
         listado.clear();
         try {
-            String sql = "SELECT cp.cursoID, cp.profesorID, cp.año, cp.semestre, " +
+            String sql = "SELECT cp.cursoID, cp.profesorID, cp.anio, cp.semestre, " +
                     "c.nombre as curso_nombre, c.activo, c.programa_id, " +
                     "p.nombres, p.apellidos, p.email, pr.tipo_contrato " +
                     "FROM CursoProfesor cp " +
@@ -101,7 +101,7 @@ public class CursosProfesores implements Servicios {
 
                 CursoProfesor cp = new CursoProfesor(
                         profesor,
-                        rs.getInt("año"),
+                        rs.getInt("anio"),
                         rs.getInt("semestre"),
                         curso
                 );

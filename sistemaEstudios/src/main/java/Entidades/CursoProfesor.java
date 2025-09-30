@@ -49,7 +49,7 @@ public class CursoProfesor {
     public String toString() {
         return "CursoProfesor{" +
                 "profesor=" + profesor +
-                ", año=" + ano +
+                ", anio=" + ano +
                 ", semestre=" + semestre +
                 ", curso=" + curso +
                 '}';

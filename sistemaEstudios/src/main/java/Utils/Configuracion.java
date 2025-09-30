@@ -19,4 +19,24 @@ public class Configuracion {
     public static String getVista() {
         return properties.getProperty("vista");
     }
+    
+    public static String getUrl() {
+        return properties.getProperty("db.url");
+    }
+
+    public static String getUser() {
+        return properties.getProperty("db.user");
+    }
+
+    public static String getPassword() {
+        return properties.getProperty("db.password");
+    }
+
+    public static String getDriver() {
+        return properties.getProperty("db.driver");
+    }
+    
+    public static String getSchema() {
+        return properties.getProperty("db.schema");
+    }
 }

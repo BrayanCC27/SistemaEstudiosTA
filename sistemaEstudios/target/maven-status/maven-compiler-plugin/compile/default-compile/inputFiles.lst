@@ -1,4 +1,5 @@
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\DTO\InscripcionDTO.java
+C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Persistencia\ConexionBD.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Utils\Configuracion.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Controller\PersonaController.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Vista\ConsolaPrincipal.java
@@ -16,7 +17,6 @@ C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\jav
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Entidades\Persona.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\DTO\ProfesorDTO.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Controller\FacultadController.java
-C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Persistencia\ConexionH2.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Persistencia\DAO\ProgramaDAO.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Persistencia\SQLbase.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Controller\ProgramaController.java
@@ -42,3 +42,4 @@ C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\jav
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Entidades\Profesor.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Fabrica\FabricaInterna.java
 C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Entidades\Facultad.java
+C:\Users\USUARIO\Documents\GitHub\SistemaEstudiosTA\sistemaEstudios\src\main\java\Utils\LectorTxt.java

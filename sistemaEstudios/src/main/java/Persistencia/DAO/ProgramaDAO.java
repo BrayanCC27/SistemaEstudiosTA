@@ -2,19 +2,25 @@ package Persistencia.DAO;
 
 import Entidades.Facultad;
 import Entidades.Programa;
-import Persistencia.ConexionH2;
+import Fabrica.FabricaInterna;
+import Interfaces.Conexion;
 
 import java.sql.*;
 import java.util.*;
 
 public class ProgramaDAO {
-    private FacultadDAO facultadDAO = new FacultadDAO();
+    private FacultadDAO facultadDAO;
+    private Conexion conexion;
 
-    // CREATE
+    public ProgramaDAO() {
+        facultadDAO = FabricaInterna.obtenerFacultadDAO();
+        conexion = FabricaInterna.obtenerConexion();
+    }
+    
     public void crear(Programa programa) {
         String sql = "INSERT INTO programa (id, nombre, duracion, registro, facultad_id) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, programa.getId());
@@ -34,7 +40,7 @@ public class ProgramaDAO {
     public Programa obtenerPorId(Double id) {
         String sql = "SELECT * FROM programa WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);
@@ -65,7 +71,7 @@ public class ProgramaDAO {
         List<Programa> programas = new ArrayList<>();
         String sql = "SELECT * FROM programa";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
                 Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -92,7 +98,7 @@ public class ProgramaDAO {
     public void actualizar(Programa programa) {
         String sql = "UPDATE programa SET nombre = ?, duracion = ?, registro = ?, facultad_id = ? WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, programa.getNombre());
@@ -112,7 +118,7 @@ public class ProgramaDAO {
     public void eliminar(Double id) {
         String sql = "DELETE FROM programa WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);

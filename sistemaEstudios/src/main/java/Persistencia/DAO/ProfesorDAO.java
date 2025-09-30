@@ -1,8 +1,8 @@
 package Persistencia.DAO;
 
 import Entidades.Profesor;
-import Persistencia.ConexionH2;
-
+import Fabrica.FabricaInterna;
+import Interfaces.Conexion;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -10,26 +10,23 @@ import java.util.logging.Logger;
 
 public class ProfesorDAO {
     private PersonaDAO personaDAO;
-    private Connection connection;
+    private Conexion conexion;
 
     public ProfesorDAO(){
-        try {
-            this.connection = ConexionH2.getInstancia().conectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfesorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.personaDAO = new PersonaDAO();
+        personaDAO = FabricaInterna.obtenerPersonaDAO();
+        conexion = FabricaInterna.obtenerConexion();
     }
 
     // CREATE
     public void crear(Profesor profesor) {
-        // First create the person record
+
         personaDAO.crear(profesor);
 
         // Then create the professor-specific information
         String sql = "INSERT INTO profesor (id, tipo_contrato) VALUES (?, ?)";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection conn = conexion.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, profesor.getId());
             stmt.setString(2, profesor.getTipoContrato());
@@ -46,7 +43,7 @@ public class ProfesorDAO {
         String sql = "SELECT p.*, per.nombres, per.apellidos, per.email FROM Profesor p " +
                 "JOIN Persona per ON p.id = per.id WHERE p.id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);
@@ -76,7 +73,7 @@ public class ProfesorDAO {
         String sql = "SELECT p.*, per.nombres, per.apellidos, per.email FROM Profesor p " +
                 "JOIN Persona per ON p.id = per.id";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -105,7 +102,7 @@ public class ProfesorDAO {
         // Update the professor-specific information
         String sql = "UPDATE profesor SET tipo_contrato = ? WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, profesor.getTipoContrato());
@@ -122,7 +119,7 @@ public class ProfesorDAO {
     public void eliminar(Double id) {
         String sql = "DELETE FROM profesor WHERE id = ?";
 
-        try (Connection conn = ConexionH2.getInstancia().conectar();
+        try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDouble(1, id);

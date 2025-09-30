@@ -4,7 +4,7 @@ import Entidades.*;
 import Interfaces.Conexion;
 import Listas.CursosInscritos;
 import Listas.CursosProfesores;
-import Persistencia.ConexionH2;
+import Persistencia.ConexionBD;
 import Persistencia.DAO.*;
 
 public class FabricaInterna {
@@ -93,7 +93,6 @@ public class FabricaInterna {
     }
     
     public static Conexion obtenerConexion(){
-        return ConexionH2.getInstancia();
-        //TODO: generar conexion segun properties
+        return ConexionBD.getInstancia();
     }
 }
