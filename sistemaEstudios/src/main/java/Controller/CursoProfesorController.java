@@ -16,11 +16,19 @@ public class CursoProfesorController {
     private CursosProfesores cursosProfesores;
     private ProfesorDAO profesorDAO;
     private CursoDAO cursoDAO;
+    public static CursoProfesorController instancia;
 
-    public CursoProfesorController() {
+    private CursoProfesorController() {
         this.cursosProfesores = FabricaInterna.obtenerCursosProfesores();
         this.profesorDAO = FabricaInterna.obtenerProfesorDAO();
         this.cursoDAO = FabricaInterna.obtenerCursoDAO();
+    }
+    
+    public static CursoProfesorController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new CursoProfesorController();
+        }
+        return instancia;
     }
 
     public CursoProfesorController(CursosProfesores cursosProfesores) {
@@ -41,12 +49,12 @@ public class CursoProfesorController {
 
     public List<CursoProfesorDTO> getListado() {
         return cursosProfesores.getListado()
-                               .stream()
-                               .map(CursoProfesorDTO::toDTO)
-                               .collect(Collectors.toList());
+                .stream()
+                .map(CursoProfesorDTO::toDTO)
+                .collect(Collectors.toList());
     }
-    
-    private CursoProfesor armarObjeto(CursoProfesorDTO cursoProfesorDTO){
+
+    private CursoProfesor armarObjeto(CursoProfesorDTO cursoProfesorDTO) {
         Profesor profesor = profesorDAO.obtenerPorId(cursoProfesorDTO.getProfesorId());
         Curso curso = cursoDAO.obtenerPorId(cursoProfesorDTO.getCursoId());
         CursoProfesor cursoProfesor = cursoProfesorDTO.toEntity(profesor, curso);

@@ -9,9 +9,17 @@ import java.util.stream.Collectors;
 
 public class ProfesorController {
     private ProfesorDAO profesorDAO;
+    public static ProfesorController instancia;
 
-    public ProfesorController() {
+    private ProfesorController() {
         this.profesorDAO = FabricaInterna.obtenerProfesorDAO();
+    }
+    
+    public static ProfesorController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new ProfesorController();
+        }
+        return instancia;
     }
     
     public void crear(ProfesorDTO profesorDTO) {

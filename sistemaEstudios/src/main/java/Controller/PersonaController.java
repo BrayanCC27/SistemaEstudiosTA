@@ -9,9 +9,17 @@ import java.util.stream.Collectors;
 
 public class PersonaController {
     private PersonaDAO personaDAO;
+    public static PersonaController instancia;
 
-    public PersonaController() {
+    private PersonaController() {
         this.personaDAO = FabricaInterna.obtenerPersonaDAO();
+    }
+    
+    public static PersonaController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new PersonaController();
+        }
+        return instancia;
     }
     
     public void crear(PersonaDTO personaDTO) {

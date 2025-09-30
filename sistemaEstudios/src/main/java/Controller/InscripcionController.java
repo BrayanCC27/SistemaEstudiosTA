@@ -16,13 +16,21 @@ public class InscripcionController {
     private CursosInscritos cursosInscritos;
     private CursoDAO cursoDAO;
     private EstudianteDAO estudianteDAO;
-    
-    public InscripcionController() {
+    public static InscripcionController instancia;
+
+    private InscripcionController() {
         this.cursosInscritos = FabricaInterna.obtenerCursosInscritos();
         this.cursoDAO = FabricaInterna.obtenerCursoDAO();
         this.estudianteDAO = FabricaInterna.obtenerEstudianteDAO();
     }
-    
+
+    public static InscripcionController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new InscripcionController();
+        }
+        return instancia;
+    }
+
     public InscripcionController(CursosInscritos cursosInscritos) {
         this.cursosInscritos = cursosInscritos;
     }
@@ -41,16 +49,15 @@ public class InscripcionController {
 
     public List<InscripcionDTO> getListado() {
         return cursosInscritos.getListado()
-                              .stream()
-                              .map(InscripcionDTO::toDTO)
-                              .collect(Collectors.toList());
+                .stream()
+                .map(InscripcionDTO::toDTO)
+                .collect(Collectors.toList());
     }
-    
-    private Inscripcion armarObjeto(InscripcionDTO inscripcionDTO){
+
+    private Inscripcion armarObjeto(InscripcionDTO inscripcionDTO) {
         Curso curso = cursoDAO.obtenerPorId(inscripcionDTO.getCursoId());
         Estudiante estudiante = estudianteDAO.obtenerPorId(inscripcionDTO.getEstudianteId());
         Inscripcion inscripcion = inscripcionDTO.toEntity(curso, estudiante);
         return inscripcion;
     }
 }
-

@@ -12,10 +12,18 @@ import java.util.stream.Collectors;
 public class ProgramaController {
     private ProgramaDAO programaDAO;
     private FacultadDAO facultadDAO;
+    public static ProgramaController instancia;
     
-    public ProgramaController() {
+    private ProgramaController() {
         this.programaDAO = FabricaInterna.obtenerProgramaDAO();
         this.facultadDAO = FabricaInterna.obtenerFacultadDAO();
+    }
+    
+    public static ProgramaController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new ProgramaController();
+        }
+        return instancia;
     }
     
     public void crear(ProgramaDTO programaDTO) {

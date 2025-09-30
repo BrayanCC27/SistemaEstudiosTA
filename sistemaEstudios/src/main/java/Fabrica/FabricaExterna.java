@@ -18,6 +18,10 @@ public class FabricaExterna {
 
     private static FabricaExterna estancia;
 
+    private static Object ProfesorController() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private FabricaExterna() {
     }
 
@@ -77,35 +81,35 @@ public class FabricaExterna {
     }
 
     public static CursoController obtenerCursoController() {
-        return new CursoController();
+        return CursoController.obtenerInstancia();
     }
 
     public static EstudianteController obtenerEstudianteController() {
-        return new EstudianteController();
+        return EstudianteController.obtenerInstancia();
     }
 
     public static PersonaController obtenerPersonaController() {
-        return new PersonaController();
+        return PersonaController.obtenerInstancia();
     }
 
     public static ProfesorController obtenerProfesorController() {
-        return new ProfesorController();
+        return ProfesorController.obtenerInstancia();
     }
 
     public static FacultadController obtenerFacultadController() {
-        return new FacultadController();
+        return FacultadController.obtenerInstancia();
     }
 
     public static ProgramaController obtenerProgramaController() {
-        return new ProgramaController();
+        return ProgramaController.obtenerInstancia();
     }
 
     public static InscripcionController obtenerInscripcionController() {
-        return new InscripcionController();
+        return InscripcionController.obtenerInstancia();
     }
 
     public static CursoProfesorController obtenerCursoProfesorController() {
-        return new CursoProfesorController();
+        return CursoProfesorController.obtenerInstancia();
     }
 
     public static <T> List<T> obtenerArray() {

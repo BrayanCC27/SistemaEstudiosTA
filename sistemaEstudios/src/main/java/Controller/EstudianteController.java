@@ -12,10 +12,18 @@ import java.util.stream.Collectors;
 public class EstudianteController {
     private EstudianteDAO estudianteDAO;
     private ProgramaDAO programaDAO;
-
-    public EstudianteController() {
+    public static EstudianteController instancia;
+    
+    private EstudianteController() {
         this.estudianteDAO = FabricaInterna.obtenerEstudianteDAO();
         this.programaDAO = FabricaInterna.obtenerProgramaDAO();
+    }
+    
+    public static EstudianteController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new EstudianteController();
+        }
+        return instancia;
     }
 
     public void crear(EstudianteDTO estudianteDTO) {

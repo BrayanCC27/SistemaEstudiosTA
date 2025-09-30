@@ -12,10 +12,18 @@ import java.util.stream.Collectors;
 public class FacultadController {
     private FacultadDAO facultadDAO;
     private PersonaDAO personaDAO;
+    public static FacultadController instancia;
 
-    public FacultadController() {
+    private FacultadController() {
         this.facultadDAO = FabricaInterna.obtenerFacultadDAO();
         this.personaDAO = FabricaInterna.obtenerPersonaDAO();
+    }
+    
+    public static FacultadController obtenerInstancia() {
+        if(instancia == null){
+            instancia = new FacultadController();
+        }
+        return instancia;
     }
 
     public void crear(FacultadDTO facultadDTO) {
