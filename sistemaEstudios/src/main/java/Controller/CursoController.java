@@ -4,6 +4,7 @@ import DTO.CursoDTO;
 import Entidades.Curso;
 import Entidades.Programa;
 import Fabrica.FabricaInterna;
+import Interfaces.Observador;
 import Persistencia.DAO.CursoDAO;
 import Persistencia.DAO.ProgramaDAO;
 import java.util.List;
@@ -52,5 +53,9 @@ public class CursoController {
 
     public void eliminar(Integer id) {
         cursoDAO.eliminar(id);
+    }
+    
+    public void añadirObservador(Observador o){
+        cursoDAO.addObservador(o);
     }
 }

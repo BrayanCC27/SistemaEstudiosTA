@@ -115,6 +115,9 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         jLabel29 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ListaCursos = new javax.swing.JTextArea();
+        jLabel35 = new javax.swing.JLabel();
+        idCurso = new javax.swing.JTextField();
+        BTNEliminarCurso = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
@@ -739,6 +742,15 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         ListaCursos.setRows(5);
         jScrollPane3.setViewportView(ListaCursos);
 
+        jLabel35.setText("ID del curso");
+
+        BTNEliminarCurso.setText("Eliminar Curso");
+        BTNEliminarCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTNEliminarCursoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -747,14 +759,20 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
                         .addComponent(jLabel28))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(jLabel29)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BTNEliminarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idCurso))))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -764,7 +782,14 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel35)
+                            .addComponent(idCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNEliminarCurso)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -892,10 +917,17 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         actualizarListaCursosProfesor();
     }//GEN-LAST:event_BTNInscribirCursoProfesorActionPerformed
 
+    private void BTNEliminarCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNEliminarCursoMouseClicked
+       int idCursoInt = Integer.parseInt(idCurso.getText());
+       cursoCon.eliminar(idCursoInt);
+       actualizarListaCursos();
+    }//GEN-LAST:event_BTNEliminarCursoMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ApellidosEstudiante;
     private javax.swing.JTextField ApellidosPersona;
     private javax.swing.JTextField ApellidosProfesor;
+    private javax.swing.JButton BTNEliminarCurso;
     private javax.swing.JButton BTNIncribirEstudiante;
     private javax.swing.JButton BTNIncribirPersona;
     private javax.swing.JButton BTNIncribirProfesor;
@@ -938,6 +970,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JTabbedPane TPPrincipal;
     private javax.swing.JComboBox<String> TipoContrato;
     private javax.swing.JTextField anoCursoProfesor;
+    private javax.swing.JTextField idCurso;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -967,6 +1000,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1025,11 +1059,13 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private void actualizarListaCursos() {
         ListaCursos.setText("");
         arrayCurso = cursoCon.obtenerTodos();
+        int index = 1;
         for (CursoDTO aux : arrayCurso) {
-            ListaCursos.append(String.valueOf(aux.getId())
+            ListaCursos.append( "("+index+")" +
+                    String.valueOf(aux.getId())
                     + " -- " + aux.getNombre()
                     + " -- " + aux.getProgramaNombre() + "\n");
-
+            index++;
         }
     }
 

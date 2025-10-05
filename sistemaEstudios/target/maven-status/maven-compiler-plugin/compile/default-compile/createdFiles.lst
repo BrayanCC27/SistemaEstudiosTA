@@ -2,6 +2,7 @@ Entidades\Persona.class
 DTO\ProfesorDTO.class
 Vista\VentanaPrincipal$9.class
 Controller\ProgramaController.class
+Vista\VentanaPrincipal$15.class
 Controller\CursoController.class
 DTO\ProgramaDTO.class
 Entidades\Inscripcion.class
@@ -35,6 +36,7 @@ DTO\CursoProfesorDTO.class
 Listas\CursosProfesores.class
 Vista\VentanaPrincipal$10.class
 Entidades\Profesor.class
+Interfaces\Observador.class
 Vista\VentanaPrincipal$7.class
 Controller\PersonaController.class
 Vista\VentanaPrincipal.class
@@ -43,11 +45,13 @@ Controller\InscripcionController.class
 Controller\EstudianteController.class
 DTO\PersonaDTO.class
 Vista\VentanaPrincipal$3.class
+Vista\ConsolaObservador.class
 Utils\Configuracion.class
 Utils\LectorTxt.class
 Fabrica\FabricaInterna.class
 Controller\ProfesorController.class
 Interfaces\Servicios.class
+Interfaces\Observado.class
 DTO\CursoDTO.class
 Persistencia\SQLbase.class
 Persistencia\DAO\CursoDAO.class

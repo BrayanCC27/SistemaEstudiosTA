@@ -10,6 +10,9 @@ import Controller.ProfesorController;
 import Controller.ProgramaController;
 import DTO.*;
 import Persistencia.SQLbase;
+import Vista.ConsolaObservador;
+import Vista.ConsolaPrincipal;
+import Vista.VentanaPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,6 +120,18 @@ public class FabricaExterna {
     
     public static SQLbase obtenerSQLbase(){
         return new SQLbase();
+    }
+    
+    public static ConsolaPrincipal ObtenerConsolaPrincipal(){
+        return new ConsolaPrincipal();
+    }
+    
+    public static ConsolaObservador ObtenerConsolaObservador(){
+        return new ConsolaObservador();
+    }
+    
+    public static VentanaPrincipal ObtenerVistaGUI(){
+        return new VentanaPrincipal();
     }
    
 }
