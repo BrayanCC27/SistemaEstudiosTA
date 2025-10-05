@@ -5,8 +5,6 @@ import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ProfesorDAO {
     private PersonaDAO personaDAO;
@@ -17,13 +15,11 @@ public class ProfesorDAO {
         conexion = FabricaInterna.obtenerConexion();
     }
 
-    // CREATE
     public void crear(Profesor profesor) {
 
         personaDAO.crear(profesor);
 
-        // Then create the professor-specific information
-        String sql = "INSERT INTO profesor (id, tipo_contrato) VALUES (?, ?)";
+        String sql = "INSERT INTO Profesor (id, tipo_contrato) VALUES (?, ?)";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -94,13 +90,10 @@ public class ProfesorDAO {
         return profesores;
     }
 
-    // UPDATE
     public void actualizar(Profesor profesor) {
-        // Update the person information
         personaDAO.actualizar(profesor);
 
-        // Update the professor-specific information
-        String sql = "UPDATE profesor SET tipo_contrato = ? WHERE id = ?";
+        String sql = "UPDATE Profesor SET tipo_contrato = ? WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -117,7 +110,7 @@ public class ProfesorDAO {
 
     // DELETE
     public void eliminar(Double id) {
-        String sql = "DELETE FROM profesor WHERE id = ?";
+        String sql = "DELETE FROM Profesor WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

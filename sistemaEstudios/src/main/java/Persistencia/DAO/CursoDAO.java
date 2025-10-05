@@ -18,7 +18,7 @@ public class CursoDAO {
     }
 
     public void crear(Curso curso) {
-        String sql = "INSERT INTO curso (id, nombre, programa_id, activo) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Curso (id, nombre, programa_id, activo) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -36,7 +36,7 @@ public class CursoDAO {
 
     // READ
     public Curso obtenerPorId(Integer id) {
-        String sql = "SELECT * FROM curso WHERE id = ?";
+        String sql = "SELECT * FROM Curso WHERE id = ?";
 
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -65,7 +65,7 @@ public class CursoDAO {
     // READ ALL
     public List<Curso> obtenerTodos() {
         List<Curso> cursos = new ArrayList<>();
-        String sql = "SELECT * FROM curso";
+        String sql = "SELECT * FROM Curso";
 
         try (Connection conn = conexion.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 

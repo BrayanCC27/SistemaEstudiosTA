@@ -3,21 +3,21 @@ CREATE TABLE IF NOT EXISTS Persona (
     nombres VARCHAR(100),
     apellidos VARCHAR(100),
     email VARCHAR(150)
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS Profesor (
     ID BIGINT PRIMARY KEY,
     tipo_contrato VARCHAR(50),
     FOREIGN KEY (ID) REFERENCES Persona(ID) ON DELETE CASCADE
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS Facultad (
     ID BIGINT PRIMARY KEY,
     nombre VARCHAR(100),
     decano_id BIGINT,
     FOREIGN KEY (decano_id) REFERENCES Persona(ID) ON DELETE CASCADE
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS Programa (
     ID BIGINT PRIMARY KEY,
     nombre VARCHAR(100),
@@ -25,16 +25,16 @@ CREATE TABLE IF NOT EXISTS Programa (
     registro VARCHAR(50),
     facultad_id BIGINT,
     FOREIGN KEY (facultad_id) REFERENCES Facultad(ID) ON DELETE CASCADE
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS Curso (
     ID BIGINT PRIMARY KEY,
     nombre VARCHAR(100),
     programa_id BIGINT NOT NULL,
     activo TINYINT(1),
     FOREIGN KEY (programa_id) REFERENCES Programa(ID) ON DELETE CASCADE
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS Estudiante (
     ID BIGINT PRIMARY KEY,
     codigo BIGINT UNIQUE,
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS Estudiante (
     promedio DOUBLE,
     FOREIGN KEY (ID) REFERENCES Persona(ID) ON DELETE CASCADE,
     FOREIGN KEY (programa_id) REFERENCES Programa(ID) ON DELETE CASCADE
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS Inscripcion (
     estudianteID BIGINT,
     cursoID BIGINT,
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS Inscripcion (
     PRIMARY KEY (estudianteID, cursoID, anio, semestre),
     FOREIGN KEY (estudianteID) REFERENCES Estudiante(ID) ON DELETE CASCADE,
     FOREIGN KEY (cursoID) REFERENCES Curso(ID) ON DELETE CASCADE
-);
-
+)
+separador
 CREATE TABLE IF NOT EXISTS CursoProfesor (
     cursoID BIGINT,
     profesorID BIGINT,
@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS CursoProfesor (
     PRIMARY KEY (profesorID, cursoID, anio, semestre),
     FOREIGN KEY (cursoID) REFERENCES Curso(ID) ON DELETE CASCADE,
     FOREIGN KEY (profesorID) REFERENCES Profesor(ID) ON DELETE CASCADE
-);
-
+)
+separador
 INSERT INTO Persona (ID, nombres, apellidos, email) VALUES
     (1, 'Decano1', 'Apellido1', 'decano1@uni.edu'),
     (2, 'Decano2', 'Apellido2', 'decano2@uni.edu'),
@@ -84,8 +84,8 @@ INSERT INTO Persona (ID, nombres, apellidos, email) VALUES
 ON DUPLICATE KEY UPDATE
     nombres=VALUES(nombres),
     apellidos=VALUES(apellidos),
-    email=VALUES(email);
-
+    email=VALUES(email)
+separador
 INSERT INTO Profesor (ID, tipo_contrato) VALUES
     (6, 'Tiempo Completo'),
     (7, 'Cátedra'),
@@ -93,8 +93,8 @@ INSERT INTO Profesor (ID, tipo_contrato) VALUES
     (9, 'Cátedra'),
     (10, 'Tiempo Completo')
 ON DUPLICATE KEY UPDATE
-    tipo_contrato=VALUES(tipo_contrato);
-
+    tipo_contrato=VALUES(tipo_contrato)
+separador
 INSERT INTO Facultad (ID, nombre, decano_id) VALUES
     (1, 'Facultad Ingeniería', 1),
     (2, 'Facultad Ciencias', 2),
@@ -103,8 +103,8 @@ INSERT INTO Facultad (ID, nombre, decano_id) VALUES
     (5, 'Facultad Economía', 5)
 ON DUPLICATE KEY UPDATE
     nombre=VALUES(nombre),
-    decano_id=VALUES(decano_id);
-
+    decano_id=VALUES(decano_id)
+separador
 INSERT INTO Programa (ID, nombre, duracion, registro, facultad_id) VALUES
     (1, 'Ing. Sistemas', 10, 'R001', 1),
     (2, 'Biología', 8, 'R002', 2),
@@ -115,10 +115,9 @@ ON DUPLICATE KEY UPDATE
     nombre=VALUES(nombre),
     duracion=VALUES(duracion),
     registro=VALUES(registro),
-    facultad_id=VALUES(facultad_id);
-
+    facultad_id=VALUES(facultad_id)
+separador
 INSERT INTO Curso (ID, nombre, programa_id, activo) VALUES
-    -- Programa 1: Ing. Sistemas
     (1, 'Algoritmos', 1, 1),
     (2, 'Estructuras de Datos', 1, 1),
     (3, 'Bases de Datos', 1, 1),
@@ -137,8 +136,8 @@ INSERT INTO Curso (ID, nombre, programa_id, activo) VALUES
 ON DUPLICATE KEY UPDATE
     nombre=VALUES(nombre),
     programa_id=VALUES(programa_id),
-    activo=VALUES(activo);
-
+    activo=VALUES(activo)
+separador
 INSERT INTO Estudiante (ID, codigo, programa_id, activo, promedio) VALUES
     (11, 2023101, 1, 1, 4.5),
     (12, 2023102, 2, 1, 4.3),
@@ -149,8 +148,8 @@ ON DUPLICATE KEY UPDATE
     codigo=VALUES(codigo),
     programa_id=VALUES(programa_id),
     activo=VALUES(activo),
-    promedio=VALUES(promedio);
-
+    promedio=VALUES(promedio)
+separador
 INSERT INTO Inscripcion (estudianteID, cursoID, anio, semestre) VALUES
     (11, 1, 2024, 1),
     (12, 4, 2024, 1),
@@ -158,8 +157,8 @@ INSERT INTO Inscripcion (estudianteID, cursoID, anio, semestre) VALUES
     (14, 10, 2024, 1),
     (15, 13, 2024, 1)
 ON DUPLICATE KEY UPDATE
-    semestre=VALUES(semestre);
-
+    semestre=VALUES(semestre)
+separador
 INSERT INTO CursoProfesor (cursoID, profesorID, anio, semestre) VALUES
     (1, 6, 2024, 1),
     (4, 7, 2024, 1),
@@ -167,4 +166,5 @@ INSERT INTO CursoProfesor (cursoID, profesorID, anio, semestre) VALUES
     (10, 9, 2024, 1),
     (13, 10, 2024, 1)
 ON DUPLICATE KEY UPDATE
-    semestre=VALUES(semestre);
+    semestre=VALUES(semestre)
+separador

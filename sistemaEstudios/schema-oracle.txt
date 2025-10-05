@@ -1,27 +1,49 @@
--- Tabla Persona
+-- ======= DROP TABLES =======
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE CursoProfesor'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Inscripcion'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Estudiante'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Curso'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Programa'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Facultad'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Profesor'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE Persona'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -942 THEN RAISE; END IF; END;
+separador
+
+-- ======= CREATE TABLES =======
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Persona (
     ID NUMBER PRIMARY KEY,
     nombres VARCHAR2(100),
     apellidos VARCHAR2(100),
     email VARCHAR2(150)
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla Profesor
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Profesor (
     ID NUMBER PRIMARY KEY,
     tipo_contrato VARCHAR2(50),
     CONSTRAINT fk_profesor_persona FOREIGN KEY (ID) REFERENCES Persona(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla Facultad
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Facultad (
     ID NUMBER PRIMARY KEY,
     nombre VARCHAR2(100),
     decano_id NUMBER,
     CONSTRAINT fk_facultad_decano FOREIGN KEY (decano_id) REFERENCES Persona(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla Programa
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Programa (
     ID NUMBER PRIMARY KEY,
     nombre VARCHAR2(100),
@@ -29,18 +51,20 @@ CREATE TABLE Programa (
     registro VARCHAR2(50),
     facultad_id NUMBER,
     CONSTRAINT fk_programa_facultad FOREIGN KEY (facultad_id) REFERENCES Facultad(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla Curso
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Curso (
     ID NUMBER PRIMARY KEY,
     nombre VARCHAR2(100),
     programa_id NUMBER NOT NULL,
-    activo NUMBER(1), -- 0 = falso, 1 = verdadero
+    activo NUMBER(1),
     CONSTRAINT fk_curso_programa FOREIGN KEY (programa_id) REFERENCES Programa(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla Estudiante
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Estudiante (
     ID NUMBER PRIMARY KEY,
     codigo NUMBER UNIQUE,
@@ -49,9 +73,10 @@ CREATE TABLE Estudiante (
     promedio NUMBER(3,2),
     CONSTRAINT fk_estudiante_persona FOREIGN KEY (ID) REFERENCES Persona(ID) ON DELETE CASCADE,
     CONSTRAINT fk_estudiante_programa FOREIGN KEY (programa_id) REFERENCES Programa(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla Inscripcion
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE Inscripcion (
     estudianteID NUMBER,
     cursoID NUMBER,
@@ -60,9 +85,10 @@ CREATE TABLE Inscripcion (
     CONSTRAINT pk_inscripcion PRIMARY KEY (estudianteID, cursoID, anio, semestre),
     CONSTRAINT fk_inscripcion_estudiante FOREIGN KEY (estudianteID) REFERENCES Estudiante(ID) ON DELETE CASCADE,
     CONSTRAINT fk_inscripcion_curso FOREIGN KEY (cursoID) REFERENCES Curso(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
--- Tabla CursoProfesor
+BEGIN EXECUTE IMMEDIATE '
 CREATE TABLE CursoProfesor (
     cursoID NUMBER,
     profesorID NUMBER,
@@ -71,24 +97,58 @@ CREATE TABLE CursoProfesor (
     CONSTRAINT pk_cursoprofesor PRIMARY KEY (profesorID, cursoID, anio, semestre),
     CONSTRAINT fk_cursoprofesor_curso FOREIGN KEY (cursoID) REFERENCES Curso(ID) ON DELETE CASCADE,
     CONSTRAINT fk_cursoprofesor_profesor FOREIGN KEY (profesorID) REFERENCES Profesor(ID) ON DELETE CASCADE
-);
+)'; EXCEPTION WHEN OTHERS THEN IF SQLCODE != -955 THEN RAISE; END IF; END;
+separador
 
---------------------------------------------------------------------------------
--- Insertando datos con MERGE (forma compatible con Oracle)
---------------------------------------------------------------------------------
-
+-- ======= INSERTS =======
 -- Persona
-MERGE INTO Persona p
-USING (SELECT 1 AS ID, 'Decano1' AS nombres, 'Apellido1' AS apellidos, 'decano1@uni.edu' AS email FROM dual) s
-ON (p.ID = s.ID)
-WHEN MATCHED THEN UPDATE SET p.nombres = s.nombres, p.apellidos = s.apellidos, p.email = s.email
-WHEN NOT MATCHED THEN INSERT (ID, nombres, apellidos, email) VALUES (s.ID, s.nombres, s.apellidos, s.email);
+BEGIN INSERT INTO Persona VALUES (1, 'Decano1', 'Apellido1', 'decano1@uni.edu'); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Persona VALUES (2, 'Profesor1', 'Apellido2', 'profesor1@uni.edu'); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Persona VALUES (3, 'Estudiante1', 'Apellido3', 'estudiante1@uni.edu'); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Persona VALUES (4, 'Decano2', 'Apellido4', 'decano2@uni.edu'); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
 
-MERGE INTO Persona p
-USING (SELECT 2 AS ID, 'Decano2', 'Apellido2', 'decano2@uni.edu' FROM dual) s
-ON (p.ID = s.ID)
-WHEN MATCHED THEN UPDATE SET p.nombres = s."Decano2", p.apellidos = s."Apellido2", p.email = s."decano2@uni.edu"
-WHEN NOT MATCHED THEN INSERT (ID, nombres, apellidos, email) VALUES (s.ID, 'Decano2', 'Apellido2', 'decano2@uni.edu');
+-- Profesor
+BEGIN INSERT INTO Profesor VALUES (2, 'Tiempo Completo'); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Profesor VALUES (4, 'Catedrático'); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
 
--- ⚠️ Repite la misma estructura para todos los inserts
--- (Oracle no permite insertar múltiples filas en un MERGE de una sola vez).
+-- Facultad
+BEGIN INSERT INTO Facultad VALUES (1, 'Ingeniería', 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Facultad VALUES (2, 'Ciencias Básicas', 4); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+
+-- Programa
+BEGIN INSERT INTO Programa VALUES (1, 'Sistemas', 10, 'REG001', 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Programa VALUES (2, 'Matemáticas', 8, 'REG002', 2); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+
+-- Curso
+BEGIN INSERT INTO Curso VALUES (1, 'Programación', 1, 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Curso VALUES (2, 'Cálculo', 2, 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+
+-- Estudiante
+BEGIN INSERT INTO Estudiante VALUES (3, 1001, 1, 1, 4.5); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Estudiante VALUES (4, 1002, 2, 1, 4.0); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+
+-- Inscripción
+BEGIN INSERT INTO Inscripcion VALUES (3, 1, 2024, 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO Inscripcion VALUES (4, 2, 2024, 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+
+-- CursoProfesor
+BEGIN INSERT INTO CursoProfesor VALUES (1, 2, 2024, 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador
+BEGIN INSERT INTO CursoProfesor VALUES (2, 4, 2024, 1); EXCEPTION WHEN DUP_VAL_ON_INDEX THEN NULL; END;
+separador

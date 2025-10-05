@@ -28,14 +28,15 @@ public class SQLbase {
         }
 
         try (Connection con = conexion.conectar(); Statement stmt = con.createStatement()) {
-            // Separar en sentencias usando ";"
-            String[] queries = sql.split(";");
+            String[] queries = sql.split("separador");
+
             for (String query : queries) {
                 query = query.trim();
                 if (!query.isEmpty()) {
                     stmt.execute(query);
                 }
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

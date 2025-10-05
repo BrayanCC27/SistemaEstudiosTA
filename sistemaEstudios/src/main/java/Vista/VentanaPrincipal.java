@@ -10,6 +10,13 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
 
     public VentanaPrincipal() {
         initComponents();
+        actualizarListaProgramas();
+        actualizarListaPersonas();
+        actualizarListaCursosProfesor();
+        actualizarListaCursos();
+        
+        actualizarComboBoxProfesores();
+        actualizarComboBoxCursos();
     }
 
     /**
@@ -854,7 +861,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     }//GEN-LAST:event_ApellidosPersonaActionPerformed
 
     private void TPPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPPersonasMouseClicked
-        actualizarListaPersonas();
+
     }//GEN-LAST:event_TPPersonasMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -863,14 +870,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TPPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPPrincipalMouseClicked
-        actualizarListaProgramas();
-        actualizarListaCursos();
-        actualizarListaCursosProfesor();
+
     }//GEN-LAST:event_TPPrincipalMouseClicked
 
     private void TPCursoProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TPCursoProfesorMouseClicked
-        actualizarComboBoxProfesores();
-        actualizarComboBoxCursos();
+
     }//GEN-LAST:event_TPCursoProfesorMouseClicked
 
     private void anoCursoProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoCursoProfesorActionPerformed
@@ -883,7 +887,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         String semestreString = (String) semestreCursoProfesor.getSelectedItem();
         int semestreInt = Integer.parseInt(semestreString);
         curso = arrayCurso.get(CBCursos.getSelectedIndex());
-        cursoProfesor = FabricaExterna.obtenerCursoProfesorDTO(PROPERTIES, semestreString, semestreString, ano, semestreInt, ERROR, semestreString);
+        cursoProfesor = FabricaExterna.obtenerCursoProfesorDTO(profesor.getId(),curso.getId(),ano,semestreInt);
+        cursoProfesorCon.inscribir(cursoProfesor);
         actualizarListaCursosProfesor();
     }//GEN-LAST:event_BTNInscribirCursoProfesorActionPerformed
 

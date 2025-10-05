@@ -4,8 +4,6 @@ import Entidades.Facultad;
 import Entidades.Persona;
 import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
-import Persistencia.DAO.PersonaDAO;
-
 import java.sql.*;
 import java.util.*;
 
@@ -21,7 +19,7 @@ public class FacultadDAO {
 
     // CREATE
     public void crear(Facultad facultad) {
-        String sql = "INSERT INTO facultad (id, nombre, decano_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Facultad (id, nombre, decano_id) VALUES (?, ?, ?)";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -39,7 +37,7 @@ public class FacultadDAO {
 
     // READ
     public Facultad obtenerPorId(Double id) {
-        String sql = "SELECT * FROM facultad WHERE id = ?";
+        String sql = "SELECT * FROM Facultad WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -72,7 +70,7 @@ public class FacultadDAO {
     // READ ALL
     public List<Facultad> obtenerTodos() {
         List<Facultad> facultades = new ArrayList<>();
-        String sql = "SELECT * FROM facultad";
+        String sql = "SELECT * FROM Facultad";
 
         try (Connection conn = conexion.conectar();
              Statement stmt = conn.createStatement();
@@ -101,7 +99,7 @@ public class FacultadDAO {
 
     // UPDATE
     public void actualizar(Facultad facultad) {
-        String sql = "UPDATE facultad SET nombre = ?, decano_id = ? WHERE id = ?";
+        String sql = "UPDATE Facultad SET nombre = ?, decano_id = ? WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -125,7 +123,7 @@ public class FacultadDAO {
 
     // DELETE
     public void eliminar(Double id) {
-        String sql = "DELETE FROM facultad WHERE id = ?";
+        String sql = "DELETE FROM Facultad WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

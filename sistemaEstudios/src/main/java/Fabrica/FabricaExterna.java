@@ -10,17 +10,12 @@ import Controller.ProfesorController;
 import Controller.ProgramaController;
 import DTO.*;
 import Persistencia.SQLbase;
-import Utils.LectorTxt;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FabricaExterna {
 
     private static FabricaExterna estancia;
-
-    private static Object ProfesorController() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     private FabricaExterna() {
     }
@@ -42,11 +37,15 @@ public class FabricaExterna {
         return new CursoDTO(id, nombre, programaId, programaNombre, activo);
     }
 
-// CursoProfesorDTO
     public static CursoProfesorDTO obtenerCursoProfesorDTO(double profesorId, String profesorNombres, String profesorApellidos,
             int ano, int semestre,
             int cursoId, String cursoNombre) {
         return new CursoProfesorDTO(ano, semestre, profesorId, profesorNombres, profesorApellidos, cursoId, cursoNombre);
+    }
+    
+    public static CursoProfesorDTO obtenerCursoProfesorDTO(double profesorId, 
+            int cursoId, int ano, int semestre) {
+        return new CursoProfesorDTO(ano, semestre, profesorId, "", "", cursoId, "");
     }
 
     public static EstudianteDTO obtenerEstudianteDTO(double id, String nombres, String apellidos, String email,

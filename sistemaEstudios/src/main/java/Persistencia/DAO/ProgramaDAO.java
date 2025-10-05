@@ -18,7 +18,7 @@ public class ProgramaDAO {
     }
     
     public void crear(Programa programa) {
-        String sql = "INSERT INTO programa (id, nombre, duracion, registro, facultad_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Programa (id, nombre, duracion, registro, facultad_id) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = conexion.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -38,7 +38,7 @@ public class ProgramaDAO {
 
     // READ
     public Programa obtenerPorId(Double id) {
-        String sql = "SELECT * FROM programa WHERE id = ?";
+        String sql = "SELECT * FROM Programa WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -69,7 +69,7 @@ public class ProgramaDAO {
     // READ ALL
     public List<Programa> obtenerTodos() {
         List<Programa> programas = new ArrayList<>();
-        String sql = "SELECT * FROM programa";
+        String sql = "SELECT * FROM Programa";
 
         try (Connection conn = conexion.conectar();
                 Statement stmt = conn.createStatement();
@@ -96,7 +96,7 @@ public class ProgramaDAO {
 
     // UPDATE
     public void actualizar(Programa programa) {
-        String sql = "UPDATE programa SET nombre = ?, duracion = ?, registro = ?, facultad_id = ? WHERE id = ?";
+        String sql = "UPDATE Programa SET nombre = ?, duracion = ?, registro = ?, facultad_id = ? WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -116,7 +116,7 @@ public class ProgramaDAO {
 
     // DELETE
     public void eliminar(Double id) {
-        String sql = "DELETE FROM programa WHERE id = ?";
+        String sql = "DELETE FROM Programa WHERE id = ?";
 
         try (Connection conn = conexion.conectar();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

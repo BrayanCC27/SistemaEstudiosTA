@@ -24,7 +24,7 @@ public class EstudianteDAO {
         personaDAO.crear(estudiante);
 
         // Then create the student-specific information
-        String sql = "INSERT INTO estudiante (id, codigo, programa_id, activo, promedio) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Estudiante (id, codigo, programa_id, activo, promedio) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -43,8 +43,8 @@ public class EstudianteDAO {
 
     // READ
     public Estudiante obtenerPorId(Double id) {
-        String sql = "SELECT e.*, p.nombres, p.apellidos, p.email FROM estudiante e "
-                + "JOIN personas p ON e.id = p.id WHERE e.id = ?";
+        String sql = "SELECT e.*, p.nombres, p.apellidos, p.email FROM Estudiante e "
+                + "JOIN Persona p ON e.id = p.id WHERE e.id = ?";
 
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -76,8 +76,8 @@ public class EstudianteDAO {
     // READ ALL
     public List<Estudiante> obtenerTodos() {
         List<Estudiante> estudiantes = new ArrayList<>();
-        String sql = "SELECT e.*, p.nombres, p.apellidos, p.email FROM estudiante e "
-                + "JOIN persona p ON e.id = p.id";
+        String sql = "SELECT e.*, p.nombres, p.apellidos, p.email FROM Estudiante e "
+                + "JOIN Persona p ON e.id = p.id";
 
         try (Connection conn = conexion.conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -108,7 +108,7 @@ public class EstudianteDAO {
         personaDAO.actualizar(estudiante);
 
         // Update the student-specific information
-        String sql = "UPDATE estudiante SET codigo = ?, programa_id = ?, activo = ?, promedio = ? WHERE id = ?";
+        String sql = "UPDATE Estudiante SET codigo = ?, programa_id = ?, activo = ?, promedio = ? WHERE id = ?";
 
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -128,7 +128,7 @@ public class EstudianteDAO {
     // DELETE
     public void eliminar(Double id) {
         // Delete student-specific information first
-        String sql = "DELETE FROM estudiante WHERE id = ?";
+        String sql = "DELETE FROM Estudiante WHERE id = ?";
 
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
