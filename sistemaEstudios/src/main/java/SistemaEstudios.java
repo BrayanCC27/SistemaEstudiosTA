@@ -1,8 +1,9 @@
 
+import Controller.CursoController;
 import Fabrica.FabricaExterna;
+import Interfaces.Observador;
 import Interfaces.VistaGenerica;
 import Persistencia.SQLbase;
-import Utils.Configuracion;
 import java.sql.SQLException;
 
 public class SistemaEstudios {
@@ -11,27 +12,17 @@ public class SistemaEstudios {
 
         SQLbase sqlbase = FabricaExterna.obtenerSQLbase();
         sqlbase.crearBD();
-        try {
-            String claseVista = Configuracion.getVista();
 
-            if (claseVista == null || claseVista.isBlank()) {
-                throw new IllegalArgumentException("No se configuró la vista en config.properties");
-            }
+        VistaGenerica gui = FabricaExterna.ObtenerVistaGUI();
+        VistaGenerica consolaPrincipal = FabricaExterna.ObtenerConsolaPrincipal();
+        VistaGenerica consolaObservador = FabricaExterna.ObtenerConsolaObservador();
 
-
-            Class<?> clazz = Class.forName(claseVista);
-            Object instancia = clazz.getDeclaredConstructor().newInstance();
-
-            if (instancia instanceof VistaGenerica) {
-                VistaGenerica vista = (VistaGenerica) instancia;
-                vista.iniciar();
-            } else {
-                throw new IllegalArgumentException("La clase " + claseVista + " no implementa VistaGenerica");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error al iniciar la aplicación.");
-        }
+        Observador observador = (Observador) consolaObservador;
+        CursoController cursoCon = FabricaExterna.obtenerCursoController();
+        cursoCon.añadirObservador(observador);
+        
+        consolaObservador.iniciar();
+        gui.iniciar();
+        consolaPrincipal.iniciar();
     }
 }

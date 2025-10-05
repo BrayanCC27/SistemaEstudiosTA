@@ -2,9 +2,6 @@ package Vista;
 
 import Controller.*;
 import DTO.*;
-
-import java.time.Year;
-import java.util.Date;
 import java.util.List;
 import Fabrica.FabricaExterna;
 import Interfaces.VistaGenerica;
@@ -107,21 +104,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         ContenedorInscripciones = new javax.swing.JPanel();
         TPInscripciones = new javax.swing.JTabbedPane();
         IncribirIncripcion = new javax.swing.JPanel();
-        jLabel35 = new javax.swing.JLabel();
-        estudianteIdInsc = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
-        cursoIdInsc = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        semestreInsc = new javax.swing.JComboBox<>();
-        BTNinscribir = new javax.swing.JButton();
         EliminarIncripcion = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        ListaInscripciones = new javax.swing.JTextArea();
-        IDEliminar1 = new javax.swing.JTextField();
-        jLabel40 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -132,6 +115,9 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         jLabel29 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ListaCursos = new javax.swing.JTextArea();
+        jLabel35 = new javax.swing.JLabel();
+        idCurso = new javax.swing.JTextField();
+        BTNEliminarCurso = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
@@ -542,11 +528,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         });
 
         semestreCursoProfesor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
-        semestreCursoProfesor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                semestreCursoProfesorActionPerformed(evt);
-            }
-        });
 
         CBCursos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -667,134 +648,28 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
 
         TPPrincipal.addTab("Curso Profesor", ContenedorCursoProfesor);
 
-        jLabel35.setText("ID Estudiante");
-
-        estudianteIdInsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estudianteIdInscActionPerformed(evt);
-            }
-        });
-
-        jLabel36.setText("ID Curso");
-
-        cursoIdInsc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cursoIdInscActionPerformed(evt);
-            }
-        });
-
-        jLabel37.setText("Semestre");
-
-        semestreInsc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
-
-        BTNinscribir.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BTNinscribir.setForeground(new java.awt.Color(51, 51, 51));
-        BTNinscribir.setText("Inscribir");
-        BTNinscribir.setBorderPainted(false);
-        BTNinscribir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNinscribirActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout IncribirIncripcionLayout = new javax.swing.GroupLayout(IncribirIncripcion);
         IncribirIncripcion.setLayout(IncribirIncripcionLayout);
         IncribirIncripcionLayout.setHorizontalGroup(
             IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IncribirIncripcionLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addGroup(IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BTNinscribir)
-                    .addGroup(IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(semestreInsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel37)
-                        .addComponent(jLabel36)
-                        .addComponent(cursoIdInsc, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel35)
-                        .addComponent(estudianteIdInsc, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(318, Short.MAX_VALUE))
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         IncribirIncripcionLayout.setVerticalGroup(
             IncribirIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(IncribirIncripcionLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel35)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estudianteIdInsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel36)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cursoIdInsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel37)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(semestreInsc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(BTNinscribir)
-                .addContainerGap(192, Short.MAX_VALUE))
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         TPInscripciones.addTab("Inscribir", IncribirIncripcion);
-
-        jLabel38.setText("Listado de inscritos");
-
-        jLabel39.setText("ID -- Curso, año, semestrer");
-
-        ListaInscripciones.setEditable(false);
-        ListaInscripciones.setColumns(20);
-        ListaInscripciones.setRows(5);
-        jScrollPane5.setViewportView(ListaInscripciones);
-
-        jLabel40.setText("ID");
-
-        jButton2.setText("Eliminar Registro");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout EliminarIncripcionLayout = new javax.swing.GroupLayout(EliminarIncripcion);
         EliminarIncripcion.setLayout(EliminarIncripcionLayout);
         EliminarIncripcionLayout.setHorizontalGroup(
             EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EliminarIncripcionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
-                .addGroup(EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EliminarIncripcionLayout.createSequentialGroup()
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(EliminarIncripcionLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton2)))
-                .addGap(62, 62, 62))
-            .addGroup(EliminarIncripcionLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel39)
-                    .addComponent(jLabel38))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         EliminarIncripcionLayout.setVerticalGroup(
             EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EliminarIncripcionLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel39)
-                .addGap(2, 2, 2)
-                .addGroup(EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EliminarIncripcionLayout.createSequentialGroup()
-                        .addGroup(EliminarIncripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel40)
-                            .addComponent(IDEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         TPInscripciones.addTab("Eliminar", EliminarIncripcion);
@@ -867,6 +742,15 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         ListaCursos.setRows(5);
         jScrollPane3.setViewportView(ListaCursos);
 
+        jLabel35.setText("ID del curso");
+
+        BTNEliminarCurso.setText("Eliminar Curso");
+        BTNEliminarCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTNEliminarCursoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -875,14 +759,20 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
                         .addComponent(jLabel28))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(jLabel29)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BTNEliminarCurso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idCurso))))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -892,7 +782,14 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel35)
+                            .addComponent(idCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BTNEliminarCurso)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -1020,51 +917,21 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         actualizarListaCursosProfesor();
     }//GEN-LAST:event_BTNInscribirCursoProfesorActionPerformed
 
-    private void semestreCursoProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semestreCursoProfesorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_semestreCursoProfesorActionPerformed
-
-    private void estudianteIdInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estudianteIdInscActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_estudianteIdInscActionPerformed
-
-    private void cursoIdInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoIdInscActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cursoIdInscActionPerformed
-
-    private void BTNinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNinscribirActionPerformed
-        double estudianteIdInscripcion = Double.valueOf(estudianteIdInsc.getText());
-        int cursoIdInscripcion = Integer.valueOf(cursoIdInsc.getText());
-        int anio = Year.now().getValue();
-        String semestre = String.valueOf(semestreInsc.getSelectedItem());
-        int semestreCast = Integer.parseInt(semestre);
-
-        inscripcionDTO = FabricaExterna.obtenerInscripcionDTO(cursoIdInscripcion,
-                cursoCon.obtenerPorId(cursoIdInscripcion).getNombre(),
-                anio,
-                semestreCast,
-                estudianteIdInscripcion,
-                estudianteCon.obtenerPorId(estudianteIdInscripcion).getNombres(),
-                estudianteCon.obtenerPorId(estudianteIdInscripcion).getApellidos()
-        );
-
-        inscripcionController.inscribirCurso(inscripcionDTO);
-
-    }//GEN-LAST:event_BTNinscribirActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void BTNEliminarCursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNEliminarCursoMouseClicked
+       int idCursoInt = Integer.parseInt(idCurso.getText());
+       cursoCon.eliminar(idCursoInt);
+       actualizarListaCursos();
+    }//GEN-LAST:event_BTNEliminarCursoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ApellidosEstudiante;
     private javax.swing.JTextField ApellidosPersona;
     private javax.swing.JTextField ApellidosProfesor;
+    private javax.swing.JButton BTNEliminarCurso;
     private javax.swing.JButton BTNIncribirEstudiante;
     private javax.swing.JButton BTNIncribirPersona;
     private javax.swing.JButton BTNIncribirProfesor;
     private javax.swing.JButton BTNInscribirCursoProfesor;
-    private javax.swing.JButton BTNinscribir;
     private javax.swing.JCheckBox CBActivo;
     private javax.swing.JComboBox<String> CBCursos;
     private javax.swing.JComboBox<String> CBProfesores;
@@ -1082,7 +949,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JTextField EmailPersona;
     private javax.swing.JTextField EmailProfesor;
     private javax.swing.JTextField IDEliminar;
-    private javax.swing.JTextField IDEliminar1;
     private javax.swing.JTextField IDEstudiante;
     private javax.swing.JTextField IDPersona;
     private javax.swing.JTextField IDProfesor;
@@ -1092,7 +958,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JPanel InscribirCursoProfesor;
     private javax.swing.JTextArea ListaCursos;
     private javax.swing.JTextArea ListaCursosProfesor;
-    private javax.swing.JTextArea ListaInscripciones;
     private javax.swing.JTextArea ListaPersonas;
     private javax.swing.JTextArea ListaProgramas;
     private javax.swing.JTextField NombresEstudiante;
@@ -1105,10 +970,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JTabbedPane TPPrincipal;
     private javax.swing.JComboBox<String> TipoContrato;
     private javax.swing.JTextField anoCursoProfesor;
-    private javax.swing.JTextField cursoIdInsc;
-    private javax.swing.JTextField estudianteIdInsc;
+    private javax.swing.JTextField idCurso;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1138,12 +1001,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1155,9 +1013,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JComboBox<String> semestreCursoProfesor;
-    private javax.swing.JComboBox<String> semestreInsc;
     // End of variables declaration//GEN-END:variables
 
     PersonaController personaCon = FabricaExterna.obtenerPersonaController();
@@ -1184,10 +1040,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     CursoProfesorDTO cursoProfesor;
     List<CursoProfesorDTO> arrayCursoProfesor = FabricaExterna.obtenerArray();
 
-    InscripcionController inscripcionController = FabricaExterna.obtenerInscripcionController();
-    InscripcionDTO inscripcionDTO;
-    List<InscripcionDTO> arrayInscripciones = FabricaExterna.obtenerArray();
-
     private void actualizarComboBoxCursos() {
         CBCursos.removeAllItems();
         arrayCurso = cursoCon.obtenerTodos();
@@ -1207,10 +1059,13 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
     private void actualizarListaCursos() {
         ListaCursos.setText("");
         arrayCurso = cursoCon.obtenerTodos();
+        int index = 1;
         for (CursoDTO aux : arrayCurso) {
-            ListaCursos.append(String.valueOf(aux.getId())
+            ListaCursos.append( "("+index+")" +
+                    String.valueOf(aux.getId())
                     + " -- " + aux.getNombre()
                     + " -- " + aux.getProgramaNombre() + "\n");
+            index++;
         }
     }
 

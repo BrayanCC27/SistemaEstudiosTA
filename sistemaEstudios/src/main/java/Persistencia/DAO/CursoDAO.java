@@ -4,13 +4,16 @@ import Entidades.Curso;
 import Entidades.Programa;
 import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
+import Interfaces.Observado;
+import Interfaces.Observador;
 import java.sql.*;
 import java.util.*;
 
-public class CursoDAO {
+public class CursoDAO implements Observado{
 
     private ProgramaDAO programaDAO;
     private Conexion conexion;
+    private static final List<Observador> observadores = new ArrayList<>();
 
     public CursoDAO() {
         programaDAO = FabricaInterna.obtenerProgramaDAO();
@@ -31,7 +34,9 @@ public class CursoDAO {
 
         } catch (SQLException e) {
             System.err.println("Error al crear curso: " + e.getMessage());
+            notificar("Error al crear curso: " + e.getMessage());
         }
+        notificar("Curso creado:" + curso.toString());
     }
 
     // READ
@@ -103,12 +108,13 @@ public class CursoDAO {
         } catch (SQLException e) {
             System.err.println("Error al actualizar curso: " + e.getMessage());
         }
+        notificar("Curso actualizado: "+ curso.toString());
     }
 
     // DELETE
     public void eliminar(Integer id) {
         String sql = "DELETE FROM curso WHERE id = ?";
-
+        Curso eliminado = obtenerPorId(id);
         try (Connection conn = conexion.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -116,6 +122,24 @@ public class CursoDAO {
 
         } catch (SQLException e) {
             System.err.println("Error al eliminar curso: " + e.getMessage());
+        }
+        notificar("Curso eliminado: "+ eliminado.toString());
+    }
+
+    @Override
+    public void addObservador(Observador o) {
+        observadores.add(o);
+    }
+
+    @Override
+    public void eliminarObservador(Observador o) {
+        observadores.remove(o);
+    }
+
+    @Override
+    public void notificar(String mensaje) {
+        for(Observador o: observadores){
+            o.actualizar(mensaje);
         }
     }
 }
