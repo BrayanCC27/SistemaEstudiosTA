@@ -3,6 +3,8 @@ package Vista;
 import Controller.*;
 import DTO.*;
 import Fabrica.FabricaExterna;
+import Controller.InscripcionController;
+import java.time.Year;
 import Interfaces.VistaGenerica;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public class ConsolaPrincipal implements VistaGenerica {
     private final ProgramaController programaCon = FabricaExterna.obtenerProgramaController();
     private final CursoController cursoCon = FabricaExterna.obtenerCursoController();
     private final CursoProfesorController cursoProfesorCon = FabricaExterna.obtenerCursoProfesorController();
+    private final InscripcionController inscripcionCon = FabricaExterna.obtenerInscripcionController();
 
     public void iniciar() {
         boolean running = true;
@@ -31,6 +34,7 @@ public class ConsolaPrincipal implements VistaGenerica {
                 case 4 -> listarProgramas();
                 case 5 -> listarCursos();
                 case 6 -> listarCursosProfesor();
+                case 7 -> manejarInscripciones();
                 case 0 -> running = false;
                 default -> System.out.println("Opción inválida.");
             }
@@ -47,7 +51,104 @@ public class ConsolaPrincipal implements VistaGenerica {
         System.out.println("4) Programas (listar)");
         System.out.println("5) Cursos (listar)");
         System.out.println("6) Cursos-Profesor (listar)");
+        System.out.println("7) Inscripciones (inscribir / eliminar / listar)");
         System.out.println("0) Salir");
+    }
+
+    // Inscripciones
+    private void manejarInscripciones() {
+        System.out.println("\n--- Inscripciones ---");
+        System.out.println("1) Inscribir");
+        System.out.println("2) Eliminar");
+        System.out.println("3) Listar");
+        System.out.println("0) Volver");
+        int opt = readInt("Opción: ");
+        switch (opt) {
+            case 1 -> inscribirInscripcion();
+            case 2 -> eliminarInscripcion();
+            case 3 -> listarInscripciones();
+            case 0 -> {}
+            default -> System.out.println("Opción inválida.");
+        }
+    }
+
+    private void inscribirInscripcion() {
+        System.out.println("-- Inscribir Inscripción --");
+        double estudianteId = readDouble("ID Estudiante (numérico): ");
+        int cursoId = readInt("ID Curso (numérico): ");
+        int anio = Year.now().getValue();
+        String semestre = readLine("Semestre (número): ");
+        int semestreInt = Integer.parseInt(semestre);
+
+        // Construir DTO usando los datos disponibles de curso y estudiante
+        var curso = cursoCon.obtenerPorId(cursoId);
+        var estudiante = estudianteCon.obtenerPorId(estudianteId);
+        if (curso == null) {
+            System.out.println("Curso no encontrado (ID: " + cursoId + ").");
+            return;
+        }
+        if (estudiante == null) {
+            System.out.println("Estudiante no encontrado (ID: " + estudianteId + ").");
+            return;
+        }
+
+        var inscripcionDTO = FabricaExterna.obtenerInscripcionDTO(
+                cursoId,
+                curso.getNombre(),
+                anio,
+                semestreInt,
+                estudianteId,
+                estudiante.getNombres(),
+                estudiante.getApellidos()
+        );
+
+        inscripcionCon.inscribirCurso(inscripcionDTO);
+        System.out.println("Inscripción creada.");
+    }
+
+    private void eliminarInscripcion() {
+        System.out.println("-- Eliminar Inscripción --");
+        double estudianteId = readDouble("ID Estudiante (numérico): ");
+        int cursoId = readInt("ID Curso (numérico): ");
+        int anio = readInt("Año de la inscripción: ");
+        int semestreInt = readInt("Semestre (número): ");
+
+        var curso = cursoCon.obtenerPorId(cursoId);
+        var estudiante = estudianteCon.obtenerPorId(estudianteId);
+        if (curso == null) {
+            System.out.println("Curso no encontrado (ID: " + cursoId + ").");
+            return;
+        }
+        if (estudiante == null) {
+            System.out.println("Estudiante no encontrado (ID: " + estudianteId + ").");
+            return;
+        }
+
+        var inscripcionDTO = FabricaExterna.obtenerInscripcionDTO(
+                cursoId,
+                curso.getNombre(),
+                anio,
+                semestreInt,
+                estudianteId,
+                estudiante.getNombres(),
+                estudiante.getApellidos()
+        );
+
+        inscripcionCon.eliminar(inscripcionDTO);
+        System.out.println("Solicitud de eliminación enviada.");
+    }
+
+    private void listarInscripciones() {
+        System.out.println("-- Listado de Inscripciones --");
+        List<InscripcionDTO> lista = inscripcionCon.getListado();
+        if (lista == null || lista.isEmpty()) {
+            System.out.println("(no hay inscripciones registradas)");
+            return;
+        }
+        for (InscripcionDTO i : lista) {
+            System.out.printf("Curso: %s | Estudiante: %s %s | %d-%d\n",
+                    i.getCursoNombre(), i.getEstudianteNombres(), i.getEstudianteApellidos(), i.getAnio(), i.getSemestre());
+        }
     }
 
     // Personas
