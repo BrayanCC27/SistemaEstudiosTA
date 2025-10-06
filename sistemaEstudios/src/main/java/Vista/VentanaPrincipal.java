@@ -1148,7 +1148,7 @@ public class VentanaPrincipal extends javax.swing.JFrame implements VistaGeneric
         comboBoxPrograma.removeAllItems();
         arrayPrograma = programaCon.obtenerTodos();
         for (ProgramaDTO aux : arrayPrograma) {
-            comboBoxPrograma.addItem(String.valueOf(aux.getId()) +"-"+aux.getNombre() );
+            comboBoxPrograma.addItem(String.valueOf(aux.getId()) +"-"+aux.getNombre());
         }
     }
 

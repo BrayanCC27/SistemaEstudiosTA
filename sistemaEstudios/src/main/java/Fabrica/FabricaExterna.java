@@ -65,8 +65,8 @@ public class FabricaExterna {
     }
 
     public static InscripcionDTO obtenerInscripcionDTO(Integer cursoId, String cursoNombre,
-            Integer anio, Integer semestre,
-            Double estudianteId, String estudianteNombres, String estudianteApellidos) {
+                                                       Integer anio, Integer semestre,
+                                                       Double estudianteId, String estudianteNombres, String estudianteApellidos) {
         return new InscripcionDTO(anio, semestre, cursoId, cursoNombre, estudianteId, estudianteNombres, estudianteApellidos);
     }
 
