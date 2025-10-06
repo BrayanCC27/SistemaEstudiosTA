@@ -1,6 +1,7 @@
 Entidades\Persona.class
 DTO\ProfesorDTO.class
 Vista\VentanaPrincipal$9.class
+Vista\VentanaPrincipal$18.class
 Controller\ProgramaController.class
 Vista\VentanaPrincipal$15.class
 Controller\CursoController.class
@@ -53,6 +54,7 @@ Vista\ConsolaObservador.class
 Utils\Configuracion.class
 Utils\LectorTxt.class
 Fabrica\FabricaInterna.class
+Vista\VentanaPrincipal$19.class
 Controller\ProfesorController.class
 Interfaces\Servicios.class
 Interfaces\Observado.class
