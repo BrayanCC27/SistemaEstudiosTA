@@ -6,6 +6,7 @@ import Listas.CursosInscritos;
 import Listas.CursosProfesores;
 import Persistencia.ConexionBD;
 import Persistencia.DAO.*;
+import Persistencia.FechaDB;
 
 public class FabricaInterna {
 
@@ -94,5 +95,9 @@ public class FabricaInterna {
     
     public static Conexion obtenerConexion(){
         return ConexionBD.getInstancia();
+    }
+    
+    public static FechaDB obtenerFechaDB(){
+        return new FechaDB();
     }
 }

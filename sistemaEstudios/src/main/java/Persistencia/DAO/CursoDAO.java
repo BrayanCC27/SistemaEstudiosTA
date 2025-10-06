@@ -119,11 +119,11 @@ public class CursoDAO implements Observado{
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
-
+            notificar("Curso eliminado: "+ eliminado.toString());
         } catch (SQLException e) {
             System.err.println("Error al eliminar curso: " + e.getMessage());
         }
-        notificar("Curso eliminado: "+ eliminado.toString());
+        
     }
 
     @Override

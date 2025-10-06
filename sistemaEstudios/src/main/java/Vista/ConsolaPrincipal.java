@@ -12,7 +12,6 @@ public class ConsolaPrincipal implements VistaGenerica {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    // Controllers
     private final PersonaController personaCon = FabricaExterna.obtenerPersonaController();
     private final EstudianteController estudianteCon = FabricaExterna.obtenerEstudianteController();
     private final ProfesorController profesorCon = FabricaExterna.obtenerProfesorController();
