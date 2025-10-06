@@ -4,6 +4,7 @@ import Controller.CursoController;
 import Controller.CursoProfesorController;
 import Controller.EstudianteController;
 import Controller.FacultadController;
+import Controller.FechaController;
 import Controller.InscripcionController;
 import Controller.PersonaController;
 import Controller.ProfesorController;
@@ -132,6 +133,10 @@ public class FabricaExterna {
     
     public static VentanaPrincipal ObtenerVistaGUI(){
         return new VentanaPrincipal();
+    }
+    
+    public static FechaController obtenerFechaController(){
+        return FechaController.obtenerInstancia();
     }
    
 }
