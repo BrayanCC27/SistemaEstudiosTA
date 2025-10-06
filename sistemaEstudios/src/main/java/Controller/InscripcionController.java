@@ -54,6 +54,13 @@ public class InscripcionController {
                 .collect(Collectors.toList());
     }
 
+    // Permite que un Observador se registre para recibir notificaciones sobre inscripciones
+    public void añadirObservador(Interfaces.Observador o) {
+        if (cursosInscritos instanceof Interfaces.Observado) {
+            ((Interfaces.Observado) cursosInscritos).addObservador(o);
+        }
+    }
+
     private Inscripcion armarObjeto(InscripcionDTO inscripcionDTO) {
         Curso curso = cursoDAO.obtenerPorId(inscripcionDTO.getCursoId());
         Estudiante estudiante = estudianteDAO.obtenerPorId(inscripcionDTO.getEstudianteId());

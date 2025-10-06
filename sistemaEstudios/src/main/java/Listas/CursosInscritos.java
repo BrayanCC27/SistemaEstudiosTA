@@ -6,6 +6,8 @@ import Entidades.Inscripcion;
 import Fabrica.FabricaInterna;
 import Interfaces.Conexion;
 import Interfaces.Servicios;
+import Interfaces.Observado;
+import Interfaces.Observador;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,10 +15,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CursosInscritos implements Servicios {
+public class CursosInscritos implements Servicios, Observado {
     private List<Inscripcion> listado;
     private Conexion conexion;
     private Connection conn;
+    private final List<Observador> observadores = new ArrayList<>();
 
     public CursosInscritos() {
         this.conexion =  FabricaInterna.obtenerConexion();
@@ -40,6 +43,8 @@ public class CursosInscritos implements Servicios {
             stmt.executeUpdate();
             stmt.close();
             listado.add(inscripcion);
+            // Notificar observadores sobre la nueva inscripción
+            notificar("Inscripcion creada: " + inscripcion.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,6 +61,8 @@ public class CursosInscritos implements Servicios {
             stmt.executeUpdate();
             stmt.close();
             listado.remove(inscripcion);
+            // Notificar observadores sobre la eliminación
+            notificar("Inscripcion eliminada: " + inscripcion.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,6 +71,8 @@ public class CursosInscritos implements Servicios {
     public void actualizar(Inscripcion inscripcion) {
         eliminar(inscripcion);
         inscribirCurso(inscripcion);
+        // Notificar observadores sobre la actualización
+        notificar("Inscripcion actualizada: " + inscripcion.toString());
     }
 
     public void guardarInformacion(Inscripcion inscripcion) {
@@ -124,6 +133,26 @@ public class CursosInscritos implements Servicios {
 
     public List<Inscripcion> getListado() {
         return listado;
+    }
+
+    // Implementación de Observado
+    @Override
+    public void addObservador(Observador o) {
+        if (o != null && !observadores.contains(o)) {
+            observadores.add(o);
+        }
+    }
+
+    @Override
+    public void eliminarObservador(Observador o) {
+        observadores.remove(o);
+    }
+
+    @Override
+    public void notificar(String mensaje) {
+        for (Observador o : observadores) {
+            o.actualizar(mensaje);
+        }
     }
 
     // Implementación de la interfaz Servicios

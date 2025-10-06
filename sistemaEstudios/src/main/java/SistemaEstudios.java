@@ -20,6 +20,9 @@ public class SistemaEstudios {
         Observador observador = (Observador) consolaObservador;
         CursoController cursoCon = FabricaExterna.obtenerCursoController();
         cursoCon.añadirObservador(observador);
+    // Registrar observador también para las inscripciones
+    Controller.InscripcionController inscripcionCon = FabricaExterna.obtenerInscripcionController();
+    inscripcionCon.añadirObservador(observador);
         
         consolaObservador.iniciar();
         gui.iniciar();
